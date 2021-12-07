@@ -20,10 +20,12 @@ public class Controller08 {
 	
 	@Setter(onMethod_ = @Autowired)
 	private CustomerDao dao;
+	
 	@RequestMapping("/met01")
 	public void method01() {
 		System.out.println(dataSource);
 	}
+	
 	@RequestMapping("/met02")
 	public void method02(Integer id) {
 		System.out.println(dao);
