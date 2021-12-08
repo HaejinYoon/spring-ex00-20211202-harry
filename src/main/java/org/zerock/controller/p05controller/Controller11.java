@@ -44,6 +44,7 @@ public class Controller11 {
 		}
 	}
 	
+	// met05?city=Berlin&country=Germany
 	@RequestMapping("/met05")
 	public void method05(String  city, String country) {
 		List<String> supplierNames = mapper.getSupplierNamesByCityAndCountry(city, country);
