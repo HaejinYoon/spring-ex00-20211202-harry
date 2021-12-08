@@ -51,6 +51,14 @@
 			Employees
 		WHERE EmployeeID = 1
 	</select>
+	
+	<select id="getEmployeeLastNameList"
+		resultType="string">
+		SELECT
+			LastName AS lname
+		FROM
+			Employees
+	</select>
 
 
 

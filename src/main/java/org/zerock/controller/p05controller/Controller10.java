@@ -56,6 +56,14 @@ public class Controller10 {
 		System.out.println(mapper.getEmployeeFirstNameOne());
 	}
 	
+	@RequestMapping("/met07")
+	public void method07() {
+		List<String> list = mapper.getEmployeeLastNameList();
+		for (String lname : list) {
+			System.out.println(lname);
+		}
+	}
+	
 	
 	
 	

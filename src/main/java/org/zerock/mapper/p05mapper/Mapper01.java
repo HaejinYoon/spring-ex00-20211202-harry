@@ -17,4 +17,6 @@ public interface Mapper01 {
 	public String getEmployeeLastNameOne();
 	
 	public String getEmployeeFirstNameOne();
+	
+	public List<String> getEmployeeLastNameList();
 }
