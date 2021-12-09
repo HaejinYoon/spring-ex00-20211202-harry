@@ -136,6 +136,17 @@ public class Controller12 {
 		System.out.println(cnt);
 	}
 	
+	@RequestMapping("/met09") 
+	public void method09(Integer id) {
+		int cnt = mapper.deleteCustomer(id);
+		System.out.println(cnt);
+	}
+	
+	@RequestMapping("/met10") 
+	public void method10(Integer id) {
+		int cnt = mapper.deleteSupplier(id);
+		System.out.println(cnt);
+	}
 	
 	
 }

@@ -20,4 +20,8 @@ public interface Mapper03 {
 	public int updateCustomer(Bean17 bean);
 
 	public int updateSupplier(Bean18 bean);
+	
+	public int deleteCustomer(Integer id);
+	
+	public int deleteSupplier(Integer id);
 }
