@@ -8,3 +8,5 @@ CREATE TABLE Board(
     inserted DATETIME DEFAULT NOW(),
     updated DATETIME DEFAULT NOW()
 );
+select * from Board;
+DESC Board;
