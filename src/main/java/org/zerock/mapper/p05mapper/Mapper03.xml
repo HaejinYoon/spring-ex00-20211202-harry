@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.p05mapper.Mapper03">
+
+	<insert id="insertCustomer">
+	INSERT INTO Customers (CustomerName, ContactName)
+	VALUES (#{customerName}, #{contactName})
+	</insert>
+	
+	<insert id="insertSupplier">
+	INSERT INTO Suppliers (SupplierName, ContactName)
+	VALUES (#{supplierName}, #{contactName})
+	</insert>
+
+	<insert id="insertCustomer2">
+	INSERT INTO Customers (CustomerName, ContactName, Address, PostalCode, Country, City)
+	VALUES (#{customerName}, #{contactName}, #{address}, #{postalCode}, #{country}, #{city})
+	</insert>
+	
+	<insert id="insertSupplier2">
+	INSERT INTO Suppliers (SupplierName, ContactName, Address, City, PostalCode, Country, Phone)
+	VALUES (#{supplierName}, #{contactName}, #{address}, #{city}, #{postalCode}, #{country}, #{phone})
+	</insert>
+	
+	<insert id="insertCustomer3" useGeneratedKeys="true" keyProperty="id" keyColumn="customerID">
+	INSERT INTO Customers (CustomerName, ContactName, Address, PostalCode, Country, City)
+	VALUES (#{customerName}, #{contactName}, #{address}, #{postalCode}, #{country}, #{city})
+	</insert>
+	
+	<insert id="insertSupplier3" useGeneratedKeys="true" keyProperty="supplierID" keyColumn="supplierID">
+	INSERT INTO Suppliers (SupplierName, ContactName, Address, City, PostalCode, Country, Phone)
+	VALUES (#{supplierName}, #{contactName}, #{address}, #{city}, #{postalCode}, #{country}, #{phone})
+	</insert>
+	
+	<update id ="updateCustomer">
+	UPDATE Customers
+	SET
+		CustomerName = #{customerName},
+		ContactName = #{contactName},
+		Address =  #{address},
+		PostalCode = #{postalCode},
+		Country = #{country},
+		City = #{city}
+	WHERE
+		CustomerID = #{id}
+	</update>
+	
+	<update id ="updateSupplier">
+	UPDATE Suppliers
+	SET
+		SupplierName = #{supplierName},
+		ContactName = #{contactName},
+		Address =  #{address},
+		PostalCode = #{postalCode},
+		Country = #{country},
+		City = #{city},
+		Phone = #{phone}
+	WHERE
+		SupplierID = #{supplierID}
+	</update>
+
+	
+
+
+
+
+
+</mapper>
