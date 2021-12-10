@@ -37,7 +37,7 @@
 						<tr>
 							<td>${board.id }</td>
 							<td>
-                  				<a href="get? id=${board.id }">
+                  				<a href="get?id=${board.id }">
                    					${board.title } 
                   				</a>
                 			</td>
