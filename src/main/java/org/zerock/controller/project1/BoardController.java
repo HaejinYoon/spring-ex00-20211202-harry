@@ -35,12 +35,13 @@ public class BoardController {
 		// jsp path : /WEB-INF/views/board/list.jsp
 	}
 	// /board/get?id=10
-	@GetMapping("/get")
+	@GetMapping({"/get", "/modify:"})
 	public void get(@RequestParam("id") Integer id, Model model) {
 		BoardVO board = service.get(id);
 		
 		model.addAttribute("board", board);
 	}
+	
 	@GetMapping("/register")
 	public void register() {
 		
@@ -59,12 +60,6 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@PostMapping("/modify")
-	public void modify(@RequestParam("id") Integer id, Model model ) {
-		BoardVO board = service.get(id);
-		
-		model.addAttribute("board", board);
-	}
 }
 
 
