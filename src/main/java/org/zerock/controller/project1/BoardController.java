@@ -35,11 +35,23 @@ public class BoardController {
 		// jsp path : /WEB-INF/views/board/list.jsp
 	}
 	// /board/get?id=10
-	@GetMapping({"/get", "/modify:"})
+	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("id") Integer id, Model model) {
 		BoardVO board = service.get(id);
 		
 		model.addAttribute("board", board);
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BoardVO board, RedirectAttributes rttr) {
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("result", board.getId()+" Modify success");
+		}
+		/* 수정된 게시물 조회로 redirect 
+		rttr.addAttribute("id", board.getId());
+		return "redirect:/board/get";
+		*/
+		return "redirect:/board/list";
 	}
 	
 	@GetMapping("/register")
@@ -53,10 +65,18 @@ public class BoardController {
 		// 3. 
 		service.register(board);
 		// 4. add attribute
-		rttr.addAttribute("result", board.getId());
+		rttr.addFlashAttribute("result", board.getId()+" board registered successfully");
 		// 5. forward/ redirect
 		// 책 : 목록으로 redirect
 		
+		return "redirect:/board/list";
+	}
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
+		if(service.remove(id)) {
+			rttr.addFlashAttribute("result", id+" Deletion success");
+		}
 		return "redirect:/board/list";
 	}
 	
