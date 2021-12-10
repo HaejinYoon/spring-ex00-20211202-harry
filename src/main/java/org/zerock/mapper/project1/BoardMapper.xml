@@ -44,7 +44,6 @@
 		title=#{title},
 		content=#{content},
 		writer=#{writer},
-		inserted=#{inserted},
 		updated=NOW()
 	WHERE
 		id = #{id}
