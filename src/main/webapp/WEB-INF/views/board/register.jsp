@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-<title>register</title>
+<title>Write On Board</title>
 </head>
 <body>
 <b:navBar></b:navBar>
@@ -21,7 +21,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<h1>게시물 작성</h1>
+			<h1>Fill in Board </h1>
 			<!-- form>.form-group*3>label[for=input$]+input.form-control#input$ -->
 			<form method="post">
 				<div class="form-group">

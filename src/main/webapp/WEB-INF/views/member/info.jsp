@@ -42,7 +42,7 @@
 				</div>
 				<!-- button.btn.btn-outline-secondary{Modify}+button.btn.btn-outline-danger{Delete} -->
 				<button class="btn btn-outline-secondary" id="modifyButton">Modify</button>
-				<button class="btn btn-outline-danger" id="removeButton">Delete</button>
+				<button class="btn btn-outline-danger" id="removeButton">End Membership</button>
 			</form>
 		</div>
 	</div>

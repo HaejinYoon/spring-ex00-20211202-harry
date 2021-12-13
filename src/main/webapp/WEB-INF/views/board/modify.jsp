@@ -22,7 +22,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<h1>게시물 수정</h1>
+			<h1>Board Modification</h1>
 			<!-- form>.form-group*3>label[for=input$]+input.form-control#input$ -->
 			<form id="modifyForm" method="post">
 				<input type="hidden" name="id" value="${board.id }">
