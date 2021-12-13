@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.project1.MemberMapper">
+
+<select id="list" resultType="org.zerock.domain.project1.MemberVO">
+	SELECT
+		id,
+		password,
+		email,
+		address,
+		inserted
+	FROM
+		Member
+	ORDER BY
+		inserted DESC
+</select>
+
+<insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+	INSERT INTO
+		Member (id, password, email, address) 
+	VALUES (#{id}, #{password}, #{email}, #{address})
+</insert>
+
+<update id="update">
+	UPDATE 
+		Member
+	SET
+		password=#{password},
+		email=#{email},
+		address=#{address}
+	WHERE
+		id = #{id}
+</update>
+
+<delete id="delete">
+	DELETE FROM Member WHERE id = #{id}
+</delete>
+
+<select id="select" resultType="org.zerock.domain.project1.MemberVO">
+	SELECT id, password, email, address, inserted
+	FROM Member
+	WHERE id = #{id}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
