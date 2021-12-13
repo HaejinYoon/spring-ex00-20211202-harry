@@ -15,7 +15,14 @@ public class MemberService {
 	private MemberMapper mapper;
 	
 	public boolean register(MemberVO member) {
-		return mapper.insert(member) ==1;
+		try {
+			return mapper.insert(member) ==1;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 	public MemberVO read(String id) {
