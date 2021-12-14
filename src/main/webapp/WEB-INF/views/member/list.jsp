@@ -22,11 +22,13 @@
 	<div class="row">
 		<div class="col">
 			<h1>Members List</h1>
+			<%-- <h2>HI!, ${memberList.nickname }</h2> --%>
 			<!-- table.table>thead>tr>th*5^^tbody -->
 			<table class="table">
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>Nickname</th>
 						<th>Password</th>
 						<th>E-Mail</th>
 						<th>Address</th>
@@ -37,6 +39,7 @@
 				<c:forEach items="${memberList }" var="member">
 					<tr>
 						<td>${member.id }</td>
+						<td>${member.nickname }</td>
 						<td>${member.password}</td>
 						<td>${member.email }</td>
 						<td>${member.address }</td>

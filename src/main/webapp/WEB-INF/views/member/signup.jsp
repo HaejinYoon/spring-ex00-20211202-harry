@@ -47,6 +47,10 @@
 					<label for="input4">Address</label>
 					<input type="text" class="form-control" id="input4" required name="address" value="${member.address }">
 				</div>
+				<div class="form-group">
+					<label for="input5">NickName</label>
+					<input type="text" class="form-control" id="input5" required name="nickname" value="${member.nickName }">
+				</div>
 				<button class="btn btn-outline-primary">Sign-up</button>
 			</form>
 		</div>

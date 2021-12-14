@@ -10,7 +10,8 @@
 		password,
 		email,
 		address,
-		inserted
+		inserted,
+		nickName
 	FROM
 		Member
 	ORDER BY
@@ -19,8 +20,8 @@
 
 <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 	INSERT INTO
-		Member (id, password, email, address) 
-	VALUES (#{id}, #{password}, #{email}, #{address})
+		Member (id, password, email, address, nickName) 
+	VALUES (#{id}, #{password}, #{email}, #{address}, #{nickname})
 </insert>
 
 <update id="update">
@@ -29,7 +30,8 @@
 	SET
 		password=#{password},
 		email=#{email},
-		address=#{address}
+		address=#{address},
+		nickname=#{nickname}
 	WHERE
 		id = #{id}
 </update>
@@ -39,7 +41,7 @@
 </delete>
 
 <select id="select" resultType="org.zerock.domain.project1.MemberVO">
-	SELECT id, password, email, address, inserted
+	SELECT id, password, email, address, inserted, nickName
 	FROM Member
 	WHERE id = #{id}
 	</select>
