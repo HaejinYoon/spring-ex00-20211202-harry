@@ -20,5 +20,8 @@ public interface BoardMapper {
 	
 	// 하나의 게시물 수정
 	public int update(BoardVO board);
+	
+	// 조회수
+	public int updateViews(Integer id);
 		
 }

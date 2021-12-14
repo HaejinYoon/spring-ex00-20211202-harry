@@ -34,4 +34,8 @@ public class BoardService {
 	public List<BoardVO> getList() {
 		return mapper.getList();
 	}
+	
+	public Boolean updateViews(Integer id) {
+		return mapper.updateViews(id)==1;
+	}
 }

@@ -35,10 +35,16 @@ public class BoardController {
 		// jsp path : /WEB-INF/views/board/list.jsp
 	}
 	// /board/get?id=10
-	@GetMapping({"/get", "/modify"})
+	@GetMapping("/get")
 	public void get(@RequestParam("id") Integer id, Model model) {
+		service.updateViews	(id);
 		BoardVO board = service.get(id);
-		
+		model.addAttribute("board", board);
+	}
+	
+	@GetMapping("/modify")
+	public void get2(@RequestParam("id") Integer id, Model model) {
+		BoardVO board = service.get(id);
 		model.addAttribute("board", board);
 	}
 	

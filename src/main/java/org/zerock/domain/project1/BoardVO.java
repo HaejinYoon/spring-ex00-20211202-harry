@@ -15,6 +15,7 @@ public class BoardVO {
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
 	private String nickName;
+	private Integer views;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

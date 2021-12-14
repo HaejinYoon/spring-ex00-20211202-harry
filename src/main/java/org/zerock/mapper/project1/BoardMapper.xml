@@ -12,6 +12,7 @@
     	b.writer,
     	b.inserted,
     	b.updated,
+    	b.views,
     	m.nickName
 	FROM
     	Board b
@@ -27,6 +28,7 @@
 		b.writer,
 		b.inserted,
 		b.updated,
+		b.views,
 		m.nickName
 	FROM
 		Board b
@@ -40,8 +42,8 @@
 
 <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 	INSERT INTO
-		Board (title, content, writer) 
-	VALUES (#{title}, #{content}, #{writer})
+		Board (title, content, writer, views) 
+	VALUES (#{title}, #{content}, #{writer}, 0)
 </insert>
 
 <update id="update">
@@ -56,11 +58,18 @@
 		id = #{id}
 </update>
 
-<delete id="delete">
+<delete id="delete" >
 	DELETE FROM Board WHERE id = #{id}
 </delete>
 
-
+<update id="updateViews" >
+	UPDATE 
+		Board
+	SET
+		views = views+ 1
+	WHERE
+		id = #{id}
+</update>
 
 
 
