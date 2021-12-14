@@ -49,7 +49,7 @@
 				</div>
 				<div class="form-group">
 					<label for="input5">NickName</label>
-					<input type="text" class="form-control" id="input5" required name="nickname" value="${member.nickName }">
+					<input type="text" class="form-control" id="input5" required name="nickname" value="${member.nickname }">
 				</div>
 				<button class="btn btn-outline-primary">Sign-up</button>
 			</form>

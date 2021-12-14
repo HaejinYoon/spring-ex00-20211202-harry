@@ -16,9 +16,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="${listUrl }">Board List</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="${registerUrl }">Write</a>
-      </li>
       <c:if test="${empty sessionScope.loggedInMember }">
       <li class="nav-item active">
       	<a class="nav-link" href="${signupUrl }">Sign-up</a>
@@ -28,6 +25,9 @@
       </li>
       </c:if>
       <c:if test="${not empty sessionScope.loggedInMember }">
+      <li class="nav-item active">
+        <a class="nav-link" href="${registerUrl }">Write</a>
+      </li>
       <li class="nav-item active">
       	<a class="nav-link" href="${memberInfoUrl }">Member Info</a>
       </li><li class="nav-item active">

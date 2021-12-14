@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-<title>Modify</title>
+<title>Board Modification</title>
 </head>
 <body>
 
@@ -36,9 +36,9 @@
 				</div>
 				<div class="form-group">
 					<label for="input3">Writer</label>
-					<input type="text" class="form-control" id="input3" name="writer" value="${board.writer }" readonly>
+					<input type="text" class="form-control" id="input3" value="${board.nickName }" readonly>
 				</div>
-				
+				<input type="hidden" name="writer" value="${board.writer }">
 				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit" >Modify</button> 
 				<!-- button.btn.btn-outline-danger{Delete} -->
 				<button id="removeSubmitButton" class="btn btn-outline-danger">Delete</button>

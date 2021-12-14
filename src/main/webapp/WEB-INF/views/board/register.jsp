@@ -35,12 +35,14 @@
 				<div class="form-group">
 					<label for="input3">Writer</label>
 					<c:if test="${not empty sessionScope.loggedInMember }">
-						<input type="text" class="form-control" id="input3" name="writer" readonly value="${sessionScope.loggedInMember.nickname }">
+						<input type="text" class="form-control" id="input3" readonly value="${sessionScope.loggedInMember.nickname }">
 					</c:if>
 					<c:if test="${empty sessionScope.loggedInMember }">
-				    	<input type="text" class="form-control" id="input3" name="writer" readonly value="Guest">
+				    	<input type="text" class="form-control" id="input3"  readonly value="Guest">
     				</c:if>
 				</div>
+				<input type="hidden" name="writer" value="${sessionScope.loggedInMember.id }">
+				
 				
 				<button class="btn btn-outline-primary" type="submit" >Register</button> 
 			</form>

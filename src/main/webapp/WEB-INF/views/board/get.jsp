@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-<title>Get</title>
+<title>Board Content</title>
 </head>
 <body>
 
@@ -21,12 +21,12 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<h1>게시물 조회</h1>
+			<h1>Board Content</h1>
 			<div class="board-view">
 				<!-- .form-group*3>label[for=input$]+input.form-control#input$[readonly] -->
 				<div class="form-group">
 					<label for="input1">Title</label>
-					<input type="text" class="form-control" id="input1" readonly value=${board.title }>
+					<input type="text" class="form-control" id="input1" readonly value="${board.title }">
 				</div>
 				<div class="form-group">
 					<label for="input2">Content</label>
@@ -35,13 +35,15 @@
 				</div>
 				<div class="form-group">
 					<label for="input3">Writer</label>
-					<input type="text" class="form-control" id="input3" readonly value="${board.writer }">
+					<input type="text" class="form-control" id="input3" readonly value="${board.nickName }">
 				</div>
 				<!-- a.btn.btn-outline-secondary>i.far.fa-edit -->
+				<c:if test="${sessionScope.loggedInMember.id eq board.writer }">
 				<a href="modify?id=${board.id }" class="btn btn-outline-secondary">
 					Modify/Delete
 					<!-- <i class="far fa-edit"></i> -->
 				</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

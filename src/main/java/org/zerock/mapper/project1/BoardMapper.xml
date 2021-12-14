@@ -6,29 +6,36 @@
 
 <select id="getList" resultType="org.zerock.domain.project1.BoardVO">
 	SELECT 
-		id,
-		title,
-		content,
-		writer,
-		inserted,
-		updated
+    	b.id,
+    	b.title,
+    	b.content,
+    	b.writer,
+    	b.inserted,
+    	b.updated,
+    	m.nickName
 	FROM
-		Board
-	ORDER BY 
-		id DESC
+    	Board b
+    JOIN
+    	Member m ON b.writer = m.id
+	ORDER BY id DESC
 </select>
 <select id="read" resultType="org.zerock.domain.project1.BoardVO">
 	SELECT 
-		id,
-		title,
-		content,
-		writer,
-		inserted,
-		updated
+		b.id,
+		b.title,
+		b.content,
+		b.writer,
+		b.inserted,
+		b.updated,
+		m.nickName
 	FROM
-		Board
+		Board b
+	LEFT JOIN
+		Member m
+	ON
+		b.writer = m.id
 	WHERE
-		id = #{id}
+		b.id = #{id}
 </select>
 
 <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">

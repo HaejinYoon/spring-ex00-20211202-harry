@@ -33,6 +33,7 @@
 						<th>E-Mail</th>
 						<th>Address</th>
 						<th>Join Date</th>
+						<th>Boards Written</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,6 +45,7 @@
 						<td>${member.email }</td>
 						<td>${member.address }</td>
 						<td>${member.inserted }</td>
+						<td>${member.numberOfBoard }</td>
 					</tr>
 				</c:forEach>
 				</tbody>

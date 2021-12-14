@@ -42,5 +42,6 @@
     <url-pattern>/member/list</url-pattern>
     <url-pattern>/member/remove</url-pattern>
     <url-pattern>/member/info</url-pattern>
+    <url-pattern>/board/register</url-pattern>
   </filter-mapping>
 </web-app>

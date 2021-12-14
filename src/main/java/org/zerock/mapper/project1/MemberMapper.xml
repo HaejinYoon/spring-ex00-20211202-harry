@@ -5,7 +5,7 @@
 <mapper namespace="org.zerock.mapper.project1.MemberMapper">
 
 <select id="list" resultType="org.zerock.domain.project1.MemberVO">
-	SELECT
+	<!-- SELECT
 		id,
 		password,
 		email,
@@ -15,7 +15,14 @@
 	FROM
 		Member
 	ORDER BY
-		inserted DESC
+		inserted DESC -->
+		SELECT m.id, m.password, m.email, m.address, m.inserted, m.nickName, count(b.id) numberOfBoard FROM Member m
+left JOIN
+Board b 
+ON m.id=b.writer
+GROUP BY m.id
+
+
 </select>
 
 <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
