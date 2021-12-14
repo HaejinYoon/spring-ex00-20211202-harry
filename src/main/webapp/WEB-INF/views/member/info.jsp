@@ -44,6 +44,10 @@
 					<label for="input5">NickName</label>
 					<input type="text" required class="form-control" name="nickname" value="${sessionScope.loggedInMember.nickname }">
 				</div>
+				<div class="form-group">
+					<label for="input6">Joined us Since</label>
+					<input type="text" required class="form-control" value="${sessionScope.loggedInMember.inserted }" readonly>
+				</div>
 				<!-- button.btn.btn-outline-secondary{Modify}+button.btn.btn-outline-danger{Delete} -->
 				<button class="btn btn-outline-secondary" id="modifyButton">Modify</button>
 				<button class="btn btn-outline-danger" id="removeButton">End Membership</button>
