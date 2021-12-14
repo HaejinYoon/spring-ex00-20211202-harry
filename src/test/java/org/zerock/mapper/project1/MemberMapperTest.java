@@ -49,7 +49,7 @@ public class MemberMapperTest {
 		// update test
 		String newPassword = "newPassword";
 		String newAddress = "newAddress";
-		LocalDateTime inserted = s.getInserted();
+		String inserted = s.getInserted();
 		
 		s.setPassword(newPassword);
 		s.setAddress(newAddress);

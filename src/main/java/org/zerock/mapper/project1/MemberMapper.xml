@@ -16,11 +16,20 @@
 		Member
 	ORDER BY
 		inserted DESC -->
-		SELECT m.id, m.password, m.email, m.address, m.inserted, m.nickName, count(b.id) numberOfBoard FROM Member m
-left JOIN
-Board b 
-ON m.id=b.writer
-GROUP BY m.id
+	SELECT 
+		m.id, 
+		m.password,  
+		m.email, 
+		m.address, 
+		m.inserted, 
+		m.nickName, 
+		count(b.id) numberOfBoard 
+	FROM 
+		Member m
+	left JOIN
+		Board b 
+	ON m.id=b.writer
+	GROUP BY m.id
 
 
 </select>

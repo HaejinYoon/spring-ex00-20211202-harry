@@ -33,7 +33,7 @@
 						<th>E-Mail</th>
 						<th>Address</th>
 						<th>Join Date</th>
-						<th>Boards Written</th>
+						<th><i class="far  fa-sticky-note"></i></th>
 					</tr>
 				</thead>
 				<tbody>

@@ -30,7 +30,7 @@
 		m.nickName
 	FROM
 		Board b
-	LEFT JOIN
+	JOIN
 		Member m
 	ON
 		b.writer = m.id
