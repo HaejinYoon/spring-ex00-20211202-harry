@@ -30,6 +30,7 @@
 						<th>Title</th>
 						<th>Writer</th>
 						<th>Date</th>
+						<th>Modi Date</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,6 +44,7 @@
                 			</td>
 							<td>${board.nickName}</td>
 							<td>${board.inserted }</td>
+							<td>${board.updated }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
