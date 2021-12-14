@@ -14,7 +14,7 @@
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="${listUrl }">Board List</a>
+        <a class="nav-link" href="${listUrl }"><i class="fas fa-list"> Board List</i></a>
       </li>
       <c:if test="${empty sessionScope.loggedInMember }">
       <li class="nav-item active">
