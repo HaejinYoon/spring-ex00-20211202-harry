@@ -12,6 +12,13 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+</style>
+
 <title>Board List</title>
 </head>
 <body>
@@ -19,7 +26,7 @@
 <b:navBar></b:navBar>
 <!-- .container>.orw>.col>h1{게시물 목록} -->
 <div class="container">
-	<div class="orw">
+	<div class="row">
 		<div class="col">
 			<h1>Board List</h1>
 			<!-- table.table>thead>tr>th*4^^tbody -->
@@ -30,7 +37,8 @@
 						<th>Title</th>
 						<th>Writer</th>
 						<th>Date</th>
-						<th>Modi Date</th>
+						<th>Modified Date</th>
+						<th>Views</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,6 +53,7 @@
 							<td>${board.nickName}</td>
 							<td>${board.inserted }</td>
 							<td>${board.updated }</td>
+							<td>${board.views }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

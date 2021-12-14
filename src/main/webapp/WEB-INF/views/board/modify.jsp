@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+#input2 {
+	width: 1110px;
+	height: 300px;
+}
+</style>
+
 <title>Board Modification</title>
 </head>
 <body>
@@ -39,9 +50,10 @@
 					<input type="text" class="form-control" id="input3" value="${board.nickName }" readonly>
 				</div>
 				<input type="hidden" name="writer" value="${board.writer }">
-				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit" >Modify</button> 
+				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit" ><i class="fas fa-edit"> Modify</i></button> 
 				<!-- button.btn.btn-outline-danger{Delete} -->
-				<button id="removeSubmitButton" class="btn btn-outline-danger">Delete</button>
+				<button id="removeSubmitButton" class="btn btn-outline-danger"><i class="fas fa-trash"> Delete</i></button>
+				<a href="/controller/board/list" class="btn btn-outline-secondary" >Cancel</a>
 			</form>
 		</div>
 	</div>

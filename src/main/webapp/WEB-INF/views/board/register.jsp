@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+#input2 {
+	width: 1110px;
+	height: 300px;
+}
+</style>
+
 <title>Write On Board</title>
 </head>
 <body>

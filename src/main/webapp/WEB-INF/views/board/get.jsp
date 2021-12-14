@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+#input2 {
+	width: 1110px;
+	height: 300px;
+}
+</style>
+
 <title>Board Content</title>
 </head>
 <body>
@@ -26,8 +37,11 @@
 				<div class="col-6">
 					<p>Written on : ${board.inserted } </p>
 				</div>
-				<div class="col-6">
+				<div class="col-4">
 					<p>Updated on : ${board.updated }</p>	
+				</div>
+				<div class="col-2">
+					<p>Views : ${board.views }</p>	
 				</div>
 			</div>
 			
@@ -49,10 +63,11 @@
 				<!-- a.btn.btn-outline-secondary>i.far.fa-edit -->
 				<c:if test="${sessionScope.loggedInMember.id eq board.writer }">
 				<a href="modify?id=${board.id }" class="btn btn-outline-secondary">
-					Modify/Delete
+					<i class="fas fa-edit">Modify</i> / <i class="fas fa-trash">Delete</i>
 					<!-- <i class="far fa-edit"></i> -->
 				</a>
-				</c:if>
+				</c:if><br>
+				<a href="/controller/board/list" class="btn btn-outline-secondary"><i class="fas fa-chevron-left">Back to Board List</i></a>
 			</div>
 		</div>
 	</div>
