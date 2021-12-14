@@ -52,4 +52,3 @@ left JOIN
 Board b 
 ON m.id=b.writer
 GROUP BY m.id
-HAVING count(m.id) 
