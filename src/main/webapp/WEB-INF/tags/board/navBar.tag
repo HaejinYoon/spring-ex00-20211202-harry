@@ -38,4 +38,10 @@
       </li>
       </c:if>
     </ul>
+    <c:if test="${empty sessionScope.loggedInMember }">
+    	<h5>Hi, GUEST!</h5>
+    </c:if>
+    <c:if test="${not empty sessionScope.loggedInMember }">
+      <h5>Hi, ${sessionScope.loggedInMember.nickname }!</h5>
+      </c:if>
 </nav>
