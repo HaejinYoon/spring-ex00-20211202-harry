@@ -22,6 +22,15 @@
 	<div class="row">
 		<div class="col">
 			<h1>Board Content</h1>
+			<div class="row">
+				<div class="col-6">
+					<p>Written on : ${board.inserted } </p>
+				</div>
+				<div class="col-6">
+					<p>Updated on : ${board.updated }</p>	
+				</div>
+			</div>
+			
 			<div class="board-view">
 				<!-- .form-group*3>label[for=input$]+input.form-control#input$[readonly] -->
 				<div class="form-group">
