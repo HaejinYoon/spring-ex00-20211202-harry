@@ -37,7 +37,7 @@ public class MemberService {
 		return mapper.delete(id) == 1;
 	}
 	
-	public List<MemberVO> list() {
+	public List<MemberVO> getList() {
 		return mapper.list();
 	}
 	

@@ -8,6 +8,7 @@
 <c:url value="/member/login" var="loginUrl"></c:url>
 <c:url value="/member/logout" var="logoutUrl"></c:url>
 <c:url value="/member/info" var="memberInfoUrl"></c:url>
+<c:url value="/member/list" var="memberListUrl"></c:url>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -29,6 +30,8 @@
       <c:if test="${not empty sessionScope.loggedInMember }">
       <li class="nav-item active">
       	<a class="nav-link" href="${memberInfoUrl }">Member Info</a>
+      </li><li class="nav-item active">
+      	<a class="nav-link" href="${memberListUrl }">Member List</a>
       </li>
       <li class="nav-item active">
       	<a class="nav-link" href="${logoutUrl }">Log-out</a>
