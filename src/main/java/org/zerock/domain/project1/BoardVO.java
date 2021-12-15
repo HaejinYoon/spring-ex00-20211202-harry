@@ -1,6 +1,7 @@
 package org.zerock.domain.project1;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -23,6 +24,19 @@ public class BoardVO {
 	
 	public String getUpdated() {
 		return this.updated.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+	}
+	
+	public String getCustomInserted() {
+		// 현재일시
+		LocalDateTime now = LocalDateTime.now(ZoneId.of("+09:00"));
+		
+		LocalDateTime beforeOneDayFromNow = now.minusDays(1);
+		
+		if(inserted.isBefore(beforeOneDayFromNow)) {
+			return inserted.toLocalDate().toString();
+		} else {
+			return inserted.toLocalTime().toString();
+		}
 	}
 }
 
