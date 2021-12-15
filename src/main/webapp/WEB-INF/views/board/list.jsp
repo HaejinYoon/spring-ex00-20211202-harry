@@ -30,7 +30,7 @@ body {
 		<div class="col">
 			<h1>Board List</h1>
 			<!-- table.table>thead>tr>th*4^^tbody -->
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th><i class="fab fa-slack-hash"></i></th>
@@ -52,7 +52,7 @@ body {
                 			</td>
 							<td><c:out value="${board.nickName}"></c:out></td>
 							<td>${board.customInserted }</td>
-							<td>${board.updated }</td>
+							<td>${board.customUpdated }</td>
 							<td>${board.views }</td>
 						</tr>
 					</c:forEach>
