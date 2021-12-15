@@ -14,6 +14,7 @@ public class MemberVO {
 	private LocalDateTime inserted;
 	private String nickname;
 	private Integer numberOfBoard;
+	private Integer adminQuali;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

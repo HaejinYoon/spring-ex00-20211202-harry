@@ -23,6 +23,7 @@
 		m.address, 
 		m.inserted, 
 		m.nickName, 
+		m.adminQuali,
 		count(b.id) numberOfBoard 
 	FROM 
 		Member m
@@ -57,7 +58,7 @@
 </delete>
 
 <select id="select" resultType="org.zerock.domain.project1.MemberVO">
-	SELECT id, password, email, address, inserted, nickName
+	SELECT id, password, email, address, inserted, nickName, adminQuali
 	FROM Member
 	WHERE id = #{id}
 	</select>

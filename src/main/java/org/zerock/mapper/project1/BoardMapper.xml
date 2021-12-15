@@ -70,6 +70,27 @@
 	WHERE
 		id = #{id}
 </update>
+<!-- <select id="getListPaging" resultType="org.zerock.domain.project1.BoardVO">
+	SELECT 
+    	b.id,
+    	b.title,
+    	b.content,
+    	b.writer,
+    	b.inserted,
+    	b.updated,
+    	b.views,
+    	m.nickName
+	FROM
+    	Board b
+    JOIN
+    	Member m ON b.writer = m.id
+	ORDER BY id DESC
+	LIMIT #{(page -1)*rowPerPage}, #{rowPerPage}
+</select> -->
+
+<select id="getTotal">
+	SELECT count(*) FROM Board
+</select>
 
 
 

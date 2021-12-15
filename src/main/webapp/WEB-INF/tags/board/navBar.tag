@@ -18,21 +18,24 @@
       </li>
       <c:if test="${empty sessionScope.loggedInMember }">
       <li class="nav-item active">
-      	<a class="nav-link" href="${signupUrl }">Sign-up</a>
+      	<a class="nav-link" href="${signupUrl }"><i class="fas fa-user-plus"> Sign-up</i></a>
       </li>
       <li class="nav-item active">
-      	<a class="nav-link" href="${loginUrl }">Log-in</a>
+      	<a class="nav-link" href="${loginUrl }"><i class="fas fa-sign-in-alt"> Log-in</i></a>
       </li>
       </c:if>
       <c:if test="${not empty sessionScope.loggedInMember }">
       <li class="nav-item active">
-        <a class="nav-link" href="${registerUrl }">Write</a>
+        <a class="nav-link" href="${registerUrl }"><i class="fas fa-pen-square"> Write On Board</i></a>
       </li>
       <li class="nav-item active">
-      	<a class="nav-link" href="${memberInfoUrl }">Member Info</a>
-      </li><li class="nav-item active">
-      	<a class="nav-link" href="${memberListUrl }">Member List</a>
+      	<a class="nav-link" href="${memberInfoUrl }"><i class="fas fa-user-circle"> My Account</i></a>
       </li>
+      	<c:if test="${not empty sessionScope.loggedInMember.adminQuali }">
+	      <li class="nav-item active">
+	      	<a class="nav-link" href="${memberListUrl }"><i class="fas fa-list"> Member List</i></a>
+	      </li>
+      	</c:if>
       <li class="nav-item active">
       	<a class="nav-link" href="${logoutUrl }">Log-out</a>
       </li>
