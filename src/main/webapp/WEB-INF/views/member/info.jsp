@@ -41,7 +41,8 @@ body {
 				</div>
 				<div class="form-group">
 					<label for="input6">Password</label>
-					<input type="password"  required class="form-control" id="input6">
+					<input type="password"  required class="form-control" id="input6" aria-describedby="passwordHelp">
+					 <small id="passwordHelp" class="form-text text-muted">Password must be matched</small>
 				</div>
 				<div class="form-group">
 					<label for="input3">E-Mail</label>
