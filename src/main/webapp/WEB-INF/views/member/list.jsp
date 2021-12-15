@@ -47,10 +47,10 @@ body {
 				<c:forEach items="${memberList }" var="member">
 					<tr>
 						<td>${member.id }</td>
-						<td>${member.nickname }</td>
-						<td>${member.password}</td>
-						<td>${member.email }</td>
-						<td>${member.address }</td>
+						<td><c:out value="${member.nickname }"/> </td>
+						<td><c:out value="${member.password}"/></td>
+						<td><c:out value="${member.email }"/></td>
+						<td><c:out value="${member.address }"/></td>
 						<td>${member.inserted }</td>
 						<td>${member.numberOfBoard }</td>
 					</tr>

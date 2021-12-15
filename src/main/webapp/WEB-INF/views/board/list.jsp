@@ -35,7 +35,7 @@ body {
 					<tr>
 						<th><i class="fab fa-slack-hash"></i></th>
 						<th>Title</th>
-						<th>Writer</th>
+						<th><i class="fas fa-user"></i></th>
 						<th>Date</th>
 						<th>Modified Date</th>
 						<th>Views</th>
@@ -47,11 +47,11 @@ body {
 							<td>${board.id }</td>
 							<td>
                   				<a href="get?id=${board.id }">
-                   					${board.title } 
+                   					<c:out value="${board.title }"/> 
                   				</a>
                 			</td>
-							<td>${board.nickName}</td>
-							<td>${board.inserted }</td>
+							<td><c:out value="${board.nickName}"></c:out></td>
+							<td>${board.customInserted }</td>
 							<td>${board.updated }</td>
 							<td>${board.views }</td>
 						</tr>
