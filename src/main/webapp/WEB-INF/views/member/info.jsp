@@ -33,27 +33,31 @@ body {
 			<form method="post" id="infoForm">
 				<div class="form-group">
 					<label for="input1">ID</label>
-					<input type="text" required class="form-control" name="id" value="${sessionScope.loggedInMember.id }" readonly>
+					<input type="text" required class="form-control" id="input1" name="id" value="${sessionScope.loggedInMember.id }" readonly>
 				</div>
 				<div class="form-group">
 					<label for="input2">Password</label>
-					<input type="text"  required class="form-control" name="password" value="${sessionScope.loggedInMember.password }">
+					<input type="password"  required class="form-control" id="input2" name="password" value="${sessionScope.loggedInMember.password }">
+				</div>
+				<div class="form-group">
+					<label for="input6">Password</label>
+					<input type="password"  required class="form-control" id="input6">
 				</div>
 				<div class="form-group">
 					<label for="input3">E-Mail</label>
-					<input type="email"  required class="form-control" name="email" value="${sessionScope.loggedInMember.email }">
+					<input type="email"  required class="form-control" id="input3" name="email" value="${sessionScope.loggedInMember.email }">
 				</div>
 				<div class="form-group">
 					<label for="input4">Address</label>
-					<input type="text" required class="form-control" name="address" value="${sessionScope.loggedInMember.address }">
+					<input type="text" required class="form-control" id="input4" name="address" value="${sessionScope.loggedInMember.address }">
 				</div>
 				<div class="form-group">
 					<label for="input5">NickName</label>
-					<input type="text" required class="form-control" name="nickname" value="${sessionScope.loggedInMember.nickname }">
+					<input type="text" required class="form-control" id="input5" name="nickname" value="${sessionScope.loggedInMember.nickname }">
 				</div>
 				<div class="form-group">
-					<label for="input6">Joined us Since</label>
-					<input type="text" required class="form-control" value="${sessionScope.loggedInMember.inserted }" readonly>
+					<label for="input7">Joined us Since</label>
+					<input type="text" required class="form-control" id="input7" value="${sessionScope.loggedInMember.inserted }" readonly>
 				</div>
 				<!-- button.btn.btn-outline-secondary{Modify}+button.btn.btn-outline-danger{Delete} -->
 				<button class="btn btn-outline-secondary" id="modifyButton">Modify</button>
@@ -85,6 +89,28 @@ body {
 			infoForm.submit();
 			}
 		})
+		
+		//password confirm
+		const passwordInput = $("#input2");
+		const passwordConfirmInput = $("#input6");
+		const submitButton = $("#modifyButton");
+	    
+		const confirmFunction = function() {
+			const passwordValue = passwordInput.val();
+			const passwordConfirmValue = passwordConfirmInput.val();
+	      
+			if (passwordValue === passwordConfirmValue) {
+				submitButton.removeAttr("disabled");
+			} else {
+				submitButton.attr("disabled", true);    
+			}
+		};
+	    
+		submitButton.attr("disabled", true);
+	    
+		passwordInput.keyup(confirmFunction);
+	    
+		passwordConfirmInput.keyup(confirmFunction);
 	});
 </script>
 </body>
