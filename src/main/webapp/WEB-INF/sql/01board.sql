@@ -30,4 +30,5 @@ UPDATE
 	WHERE
 		id = 44;
 
+SELECT count(*) FROM Board;
 
