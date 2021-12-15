@@ -53,7 +53,7 @@ body {
 				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit" ><i class="fas fa-edit"> Modify</i></button> 
 				<!-- button.btn.btn-outline-danger{Delete} -->
 				<button id="removeSubmitButton" class="btn btn-outline-danger"><i class="fas fa-trash"> Delete</i></button>
-				<a href="/controller/board/list" class="btn btn-outline-secondary" >Cancel</a>
+				<a href="${pageContext.request.contextPath }/board/list" class="btn btn-outline-secondary" >Cancel</a>
 			</form>
 		</div>
 	</div>

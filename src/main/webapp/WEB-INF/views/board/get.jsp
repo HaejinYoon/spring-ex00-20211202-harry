@@ -67,7 +67,7 @@ body {
 					<!-- <i class="far fa-edit"></i> -->
 				</a>
 				</c:if><br>
-				<a href="/controller/board/list" class="btn btn-outline-secondary"><i class="fas fa-chevron-left">Back to Board List</i></a>
+				<a href="${pageContext.request.contextPath }/board/list" class="btn btn-outline-secondary"><i class="fas fa-chevron-left">Back to Board List</i></a>
 			</div>
 		</div>
 	</div>
