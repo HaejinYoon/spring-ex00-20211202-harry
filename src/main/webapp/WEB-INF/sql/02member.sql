@@ -9,6 +9,7 @@ CREATE TABLE Member(
 ALTER TABLE Member ADD COLUMN inserted DATETIME NOT NULL DEFAULT NOW();
 
 ALTER TABLE Member ADD COLUMN nickName VARCHAR(30); -- 컬럼 추가
+ALTER TABLE Member ADD COLUMN adminQuali INT;
 
 SELECT * FROM Member ORDER BY inserted DESC;
 
@@ -51,4 +52,8 @@ SELECT
 left JOIN
 Board b 
 ON m.id=b.writer
-GROUP BY m.id
+GROUP BY m.id;
+
+DESC Member;
+
+SELECT * FROM Member;
