@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.project1.MemberVO;
+import org.zerock.domain.project1.PageInfoVO;
 import org.zerock.service.project1.MemberService;
 
 import lombok.Setter;
@@ -132,16 +134,21 @@ public class MemberController {
 		return "redirect:/board/list";
 	}
 	@GetMapping("/list")
-	public String list(Model model, HttpSession session) {
+	public String list(@RequestParam(value="page", defaultValue="1")Integer page, Model model, HttpSession session) {
 		MemberVO vo = (MemberVO) session.getAttribute("loggedInMember");
 		
 		if(vo == null) {
 			return "redirect:/member/login";
 		}
 		
-		List<MemberVO> list = service.getList();
+		Integer numberPerPage = 5; // 한 페이지의 레코드의 수
+		 Integer numberPerPagination = 5; // 한 페이지네이션안의 갯수
+		 
+		List<MemberVO> list = service.getListPage(page, numberPerPage, numberPerPagination);
+		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
 		
 		model.addAttribute("memberList", list);
+		model.addAttribute("pageInfo", pageInfo);
 		
 		return null;
 	}

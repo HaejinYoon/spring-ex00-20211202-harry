@@ -48,12 +48,37 @@ SELECT
 	ORDER BY
 		inserted DESC;
         
-		SELECT m.id, m.password, m.email, m.address, m.inserted, m.nickName, count(b.id) numberOfBoard FROM Member m
-left JOIN
-Board b 
-ON m.id=b.writer
+SELECT 
+    m.id,
+    m.password,
+    m.email,
+    m.address,
+    m.inserted,
+    m.nickName,
+    COUNT(b.id) numberOfBoard
+FROM
+    Member m
+        LEFT JOIN
+    Board b ON m.id = b.writer
 GROUP BY m.id;
 
 DESC Member;
 
 SELECT * FROM Member;
+
+    SELECT 
+        m.id, 
+		m.password,  
+		m.email, 
+		m.address, 
+		m.inserted, 
+		m.nickName, 
+		m.adminQuali,
+		count(b.id) numberOfBoard 
+	FROM 
+		Member m
+    JOIN
+      Board b ON m.id =b.writer
+  GROUP BY m.id DESC
+  ORDER BY m.id DESC
+  LIMIT 0, 10;
