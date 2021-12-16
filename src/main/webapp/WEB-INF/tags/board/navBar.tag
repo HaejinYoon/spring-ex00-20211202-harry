@@ -11,7 +11,7 @@
 <c:url value="/member/info" var="memberInfoUrl"></c:url>
 <c:url value="/member/list" var="memberListUrl"></c:url>
 
-<nav class="navbar navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
 
 	<ul class="navbar-nav mr-auto">
 		<li class="nav-item active ">
