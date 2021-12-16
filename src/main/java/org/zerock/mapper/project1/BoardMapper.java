@@ -2,6 +2,7 @@ package org.zerock.mapper.project1;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.project1.BoardVO;
 
 public interface BoardMapper {
@@ -23,6 +24,12 @@ public interface BoardMapper {
 	
 	// 조회수
 	public int updateViews(Integer id);
+	
+	// Pagination
+	public List<BoardVO> getListPage(@Param("from") Integer from, @Param("items") Integer numberPerPage);
+	
+	// 총 게시물 수
+	public Integer getCountRows();
 	
 //	//pagination
 //	public List<BoardVO> getListPaging();
