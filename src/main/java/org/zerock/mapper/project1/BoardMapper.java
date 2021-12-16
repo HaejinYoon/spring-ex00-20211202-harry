@@ -26,7 +26,7 @@ public interface BoardMapper {
 	public int updateViews(Integer id);
 	
 	// Pagination
-	public List<BoardVO> getListPage(@Param("from") Integer from, @Param("items") Integer numberPerPage);
+	public List<BoardVO> getListPage(@Param("from") Integer from, @Param("items") Integer numberPerPage, Integer numberPerPagination);
 	
 	// 총 게시물 수
 	public Integer getCountRows();

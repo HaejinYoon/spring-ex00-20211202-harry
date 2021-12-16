@@ -28,14 +28,13 @@ public class BoardController {
 //		  if(page == null) {
 //			  page=1;
 //		  }
-		  System.out.println(page);
 		  Integer numberPerPage = 10; // 한 페이지의 레코드의 수
-		  
+		  Integer numberPerPagination = 10; // 한 페이지네이션안의 갯수
 		  // 3. business logic 
 		  //게시물(Board) 목록 조회 
 //		  List<BoardVO> list = service.getList();
-		  List<BoardVO> list = service.getListPage(page, numberPerPage);
-		  PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage);
+		  List<BoardVO> list = service.getListPage(page, numberPerPage, numberPerPagination);
+		  PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
 		  
 		  // 4. 
 		  model.addAttribute("list", list);
