@@ -19,12 +19,12 @@ import org.zerock.domain.project1.MemberVO;
  */
 public class CheckLoginFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public CheckLoginFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public CheckLoginFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -36,20 +36,21 @@ public class CheckLoginFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		
-		//session Attribute loggedInMember가 있으면 계속 진행
+
+		// session Attribute loggedInMember가 있으면 계속 진행
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		MemberVO vo = (MemberVO)session.getAttribute("loggedInMember");
-		if (vo==null) {
+		MemberVO vo = (MemberVO) session.getAttribute("loggedInMember");
+		if (vo == null) {
 			// 없으면 /member/login으로 redirect
-			String location = req.getContextPath()+"/member/login";
+			String location = req.getContextPath() + "/member/login";
 			HttpServletResponse res = (HttpServletResponse) response;
 			res.sendRedirect(location);
-		}else {
+		} else {
 			// 있으면
 			chain.doFilter(request, response);
 		}
