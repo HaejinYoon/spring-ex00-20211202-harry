@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<c:url value="/board/home" var="homeUrl"></c:url>
 <c:url value="/board/list" var="listUrl"></c:url>
 <c:url value="/board/register" var="registerUrl"></c:url>
 <c:url value="/member/signup" var="signupUrl"></c:url>
@@ -10,9 +11,14 @@
 <c:url value="/member/info" var="memberInfoUrl"></c:url>
 <c:url value="/member/list" var="memberListUrl"></c:url>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-light bg-primary">
 
 	<ul class="navbar-nav mr-auto">
+		<li class="nav-item active ">
+			<a class="nav-link" href="${homeUrl }">
+				<i class="fas fa-home"> Home </i>
+			</a>
+		</li>
 		<li class="nav-item active">
 			<a class="nav-link" href="${listUrl }">
 				<i class="fas fa-list"> Board List</i>

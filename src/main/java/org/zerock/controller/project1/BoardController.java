@@ -23,26 +23,30 @@ public class BoardController {
 	@Setter(onMethod_ = @Autowired)
 	private BoardService service;
 
-	  @GetMapping("/list") 
-	  public void list(@RequestParam(value="page", defaultValue="1")Integer page, Model model) {
+	@GetMapping("/home")
+	public void home() {
+		
+	}
+	
+	@GetMapping("/list")
+	public void list(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
 //		  if(page == null) {
 //			  page=1;
 //		  }
-		  Integer numberPerPage = 10; // 한 페이지의 레코드의 수
-		  Integer numberPerPagination = 10; // 한 페이지네이션안의 갯수
-		  // 3. business logic 
-		  //게시물(Board) 목록 조회 
+		Integer numberPerPage = 10; // 한 페이지의 레코드의 수
+		Integer numberPerPagination = 10; // 한 페이지네이션안의 갯수
+		// 3. business logic
+		// 게시물(Board) 목록 조회
 //		  List<BoardVO> list = service.getList();
-		  List<BoardVO> list = service.getListPage(page, numberPerPage, numberPerPagination);
-		  PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
-		  
-		  // 4. 
-		  model.addAttribute("list", list);
-		  model.addAttribute("pageInfo", pageInfo);
-	  
-		  // 5. // jsp path : /WEB-INF/views/board/list.jsp }
-	  }
-	 
+		List<BoardVO> list = service.getListPage(page, numberPerPage, numberPerPagination);
+		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
+
+		// 4.
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+
+		// 5. // jsp path : /WEB-INF/views/board/list.jsp }
+	}
 
 //	@GetMapping("/list")
 //	public int getTotal(Model model) {
@@ -61,31 +65,33 @@ public class BoardController {
 //	  endPage = ((total-1) / rowPerPage) + 1;
 //	  
 //	  model.addAttribute("list", list); return list; }
-	 
+
 	// /board/get?id=10
 	@GetMapping("/get")
-	public void get(@RequestParam("id") Integer id, Model model) {
+	public void get(@RequestParam("id") Integer id, @RequestParam("page") Integer page, Model model) {
 		service.updateViews(id);
 		BoardVO board = service.get(id);
 		model.addAttribute("board", board);
+		model.addAttribute("currentPage", page);
 	}
 
 	@GetMapping("/modify")
-	public void get2(@RequestParam("id") Integer id, Model model) {
+	public void get2(@RequestParam("id") Integer id, @RequestParam("page") Integer page, Model model) {
 		BoardVO board = service.get(id);
 		model.addAttribute("board", board);
+		model.addAttribute("currentPage", page);
 	}
 
 	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr) {
+	public String modify(BoardVO board, RedirectAttributes rttr, PageInfoVO page) {
 		if (service.modify(board)) {
-			rttr.addFlashAttribute("result", board.getId() + " Modify success");
+			rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
 		}
 		/*
 		 * 수정된 게시물 조회로 redirect rttr.addAttribute("id", board.getId()); return
 		 * "redirect:/board/get";
 		 */
-		return "redirect:/board/list";
+		return "redirect:/board/list?page="+page.getCurrentPage();
 	}
 
 	@GetMapping("/register")
@@ -99,7 +105,7 @@ public class BoardController {
 		// 3.
 		service.register(board);
 		// 4. add attribute
-		rttr.addFlashAttribute("result", board.getId() + " board registered successfully");
+		rttr.addFlashAttribute("result", "No." + board.getId() + " board registered successfully");
 		// 5. forward/ redirect
 		// 책 : 목록으로 redirect
 
@@ -107,11 +113,11 @@ public class BoardController {
 	}
 
 	@PostMapping("/remove")
-	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
+	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr, PageInfoVO page) {
 		if (service.remove(id)) {
-			rttr.addFlashAttribute("result", id + " Deletion success");
+			rttr.addFlashAttribute("result", "No." + id + " Deletion success");
 		}
-		return "redirect:/board/list";
+		return "redirect:/board/list?page="+page.getCurrentPage();
 	}
 
 }
