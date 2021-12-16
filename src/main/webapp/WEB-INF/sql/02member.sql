@@ -77,8 +77,10 @@ SELECT * FROM Member;
 		count(b.id) numberOfBoard 
 	FROM 
 		Member m
-    JOIN
+    LEFT JOIN
       Board b ON m.id =b.writer
   GROUP BY m.id DESC
   ORDER BY m.id DESC
   LIMIT 0, 10;
+  
+  select count(id) from Member;
