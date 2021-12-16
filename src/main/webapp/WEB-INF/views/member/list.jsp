@@ -78,9 +78,17 @@ body {
 				<c:url value="/member/list" var="pageLink">
 					<c:param name="page" value="${pageInfo.leftPageNumber-1 }"></c:param>
 				</c:url>
+				<c:url value="/member/list" var="pageLinkStart">
+					<c:param name="page" value="1"></c:param>
+				</c:url>
+				<li class="page-item">
+					<a class="page-link" href="${pageLinkStart }" aria-label="Start">
+						<i class="fas fa-angle-double-left"></i>
+					</a>
+				</li>
 				<li class="page-item">
 					<a class="page-link" href="${pageLink }" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
+						<i class="fas fa-angle-left"></i>
 					</a>
 				</li>
 			</c:if>
@@ -97,9 +105,17 @@ body {
 				<c:url value="/member/list" var="pageLink">
 					<c:param name="page" value="${pageInfo.rightPageNumber+1 }"></c:param>
 				</c:url>
+				<c:url value="/member/list" var="pageLinkEnd">
+					<c:param name="page" value="${pageInfo.lastPage }"></c:param>
+				</c:url>
 				<li class="page-item">
 					<a class="page-link" href="${pageLink }" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
+						<i class="fas fa-angle-right"></i>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="${pageLinkEnd }" aria-label="End">
+						<i class="fas fa-angle-double-right"></i>
 					</a>
 				</li>
 			</c:if>

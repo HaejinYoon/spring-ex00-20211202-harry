@@ -16,6 +16,7 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background-color: ;
 }
 </style>
 <title>Board List</title>
@@ -28,7 +29,7 @@ body {
 			<div class="col">
 				<h1>Board List</h1>
 				<!-- table.table>thead>tr>th*4^^tbody -->
-				<table class="table table-hover">
+				<table class="table table-hover table-bordered">
 					<thead class="thead-dark">
 						<tr>
 							<th>
@@ -48,7 +49,7 @@ body {
 							<tr>
 								<td>${board.id }</td>
 								<td>
-									<a href="get?id=${board.id }">
+									<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
 										<c:out value="${board.title }" />
 									</a>
 								</td>
@@ -62,20 +63,28 @@ body {
 						</c:forEach>
 					</tbody>
 				</table>
+				<hr>
 			</div>
 		</div>
 	</div>
 	<!-- pagination -->
-	<hr>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<c:if test="${pageInfo.hasPrevButton }">
 				<c:url value="/board/list" var="pageLink">
 					<c:param name="page" value="${pageInfo.leftPageNumber-1 }"></c:param>
 				</c:url>
+				<c:url value="/board/list" var="pageLinkStart">
+					<c:param name="page" value="1"></c:param>
+				</c:url>
+				<li class="page-item">
+					<a class="page-link" href="${pageLinkStart }" aria-label="Start">
+						<i class="fas fa-angle-double-left"></i>
+					</a>
+				</li>
 				<li class="page-item">
 					<a class="page-link" href="${pageLink }" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
+						<i class="fas fa-angle-left"></i>
 					</a>
 				</li>
 			</c:if>
@@ -92,9 +101,17 @@ body {
 				<c:url value="/board/list" var="pageLink">
 					<c:param name="page" value="${pageInfo.rightPageNumber+1 }"></c:param>
 				</c:url>
+				<c:url value="/board/list" var="pageLinkEnd">
+					<c:param name="page" value="${pageInfo.lastPage }"></c:param>
+				</c:url>
 				<li class="page-item">
 					<a class="page-link" href="${pageLink }" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
+						<i class="fas fa-angle-right"></i>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="${pageLinkEnd }" aria-label="End">
+						<i class="fas fa-angle-double-right"></i>
 					</a>
 				</li>
 			</c:if>
