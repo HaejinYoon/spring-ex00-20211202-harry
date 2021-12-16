@@ -19,7 +19,6 @@ body {
 }
 
 #input2 {
-	width: 1110px;
 	height: 300px;
 }
 </style>
@@ -63,16 +62,13 @@ body {
 					</div>
 					<!-- a.btn.btn-outline-secondary>i.far.fa-edit -->
 					<c:if test="${sessionScope.loggedInMember.id eq board.writer }">
-						<a href="modify?id=${board.id }" class="btn btn-outline-secondary">
-							<i class="fas fa-edit">Modify</i>
-							/
-							<i class="fas fa-trash">Delete</i>
+						<a href="modify?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">
+							<i class="fas fa-edit"> Modify</i> / <i class="fas fa-trash"> Delete</i>
 							<!-- <i class="far fa-edit"></i> -->
 						</a>
 					</c:if>
-					<br>
-					<a href="${pageContext.request.contextPath }/board/list" class="btn btn-outline-secondary">
-						<i class="fas fa-chevron-left">Back to Board List</i>
+					<a href="${pageContext.request.contextPath }/board/list?page=${currentPage}" class="btn btn-outline-secondary">
+						<i class="fas fa-chevron-left"> Back to Board List</i>
 					</a>
 				</div>
 			</div>
