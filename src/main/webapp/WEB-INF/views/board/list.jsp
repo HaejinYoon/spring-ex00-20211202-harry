@@ -18,7 +18,6 @@ body {
 	font-size: 14px;
 }
 </style>
-탭을 선호하긴 해서 ㅎㅎ
 <title>Board List</title>
 </head>
 <body>
