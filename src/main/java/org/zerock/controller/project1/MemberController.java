@@ -134,12 +134,12 @@ public class MemberController {
 		return "redirect:/board/list";
 	}
 	@GetMapping("/list")
-	public String list(@RequestParam(value="page", defaultValue="1")Integer page, Model model, HttpSession session) {
-		MemberVO vo = (MemberVO) session.getAttribute("loggedInMember");
-		
-		if(vo == null) {
-			return "redirect:/member/login";
-		}
+	public String list(@RequestParam(value="page", defaultValue="1")Integer page, Model model) {
+//		MemberVO vo = (MemberVO) session.getAttribute("loggedInMember");
+//		
+//		if(vo == null) {
+//			return "redirect:/member/login";
+//		}
 		
 		Integer numberPerPage = 5; // 한 페이지의 레코드의 수
 		 Integer numberPerPagination = 5; // 한 페이지네이션안의 갯수
