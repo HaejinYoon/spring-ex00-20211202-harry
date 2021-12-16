@@ -23,5 +23,11 @@ public interface BoardMapper {
 	
 	// 조회수
 	public int updateViews(Integer id);
+	
+//	//pagination
+//	public List<BoardVO> getListPaging();
+//	
+//	// 게시물 총 갯수
+//	public int getTotal();
 		
 }

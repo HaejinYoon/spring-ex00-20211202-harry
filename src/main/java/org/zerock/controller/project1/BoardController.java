@@ -18,85 +18,91 @@ import lombok.Setter;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private BoardService service;
-	
-	@GetMapping("/list")
-	public void list(Model model) {
-		// 3. business logic
-		// 게시물(Board) 목록 조회
-		List<BoardVO> list = service.getList();
-		
-		// 4.
-		model.addAttribute("list", list);
-		
-		// 5.
-		// jsp path : /WEB-INF/views/board/list.jsp
-	}
+
+	  @GetMapping("/list") 
+	  public void list(Model model) { 
+		  // 3. business logic 
+		  //게시물(Board) 목록 조회 
+		  List<BoardVO> list = service.getList();
+	  
+		  // 4. 
+		  model.addAttribute("list", list);
+	  
+		  // 5. // jsp path : /WEB-INF/views/board/list.jsp }
+	  }
+	 
+
+//	@GetMapping("/list")
+//	public int getTotal(Model model) {
+//		return 3;
+//	}
+
+//	  public List<BoardVO> getListPaging(Model model, int page, int rowPerPage) {
+//	  List<BoardVO> list = service.getListPaging();
+//	  
+//	  int endPage=1;
+//	  
+//	  
+//	  rowPerPage = 10;
+//	  
+//	  list=getListPaging(model, page, rowPerPage); int total = getTotal(model);
+//	  endPage = ((total-1) / rowPerPage) + 1;
+//	  
+//	  model.addAttribute("list", list); return list; }
+	 
 	// /board/get?id=10
 	@GetMapping("/get")
 	public void get(@RequestParam("id") Integer id, Model model) {
-		service.updateViews	(id);
+		service.updateViews(id);
 		BoardVO board = service.get(id);
 		model.addAttribute("board", board);
 	}
-	
+
 	@GetMapping("/modify")
 	public void get2(@RequestParam("id") Integer id, Model model) {
 		BoardVO board = service.get(id);
 		model.addAttribute("board", board);
 	}
-	
+
 	@PostMapping("/modify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
-		if(service.modify(board)) {
-			rttr.addFlashAttribute("result", board.getId()+" Modify success");
+		if (service.modify(board)) {
+			rttr.addFlashAttribute("result", board.getId() + " Modify success");
 		}
-		/* 수정된 게시물 조회로 redirect 
-		rttr.addAttribute("id", board.getId());
-		return "redirect:/board/get";
-		*/
+		/*
+		 * 수정된 게시물 조회로 redirect rttr.addAttribute("id", board.getId()); return
+		 * "redirect:/board/get";
+		 */
 		return "redirect:/board/list";
 	}
-	
+
 	@GetMapping("/register")
 	public void register() {
-		
+
 	}
-	
+
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		// 2. request 분석 가공 BoardVO board 명시하는 것으로 생략가능
-		// 3. 
+		// 3.
 		service.register(board);
 		// 4. add attribute
-		rttr.addFlashAttribute("result", board.getId()+" board registered successfully");
+		rttr.addFlashAttribute("result", board.getId() + " board registered successfully");
 		// 5. forward/ redirect
 		// 책 : 목록으로 redirect
-		
+
 		return "redirect:/board/list";
 	}
-	
+
 	@PostMapping("/remove")
 	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
-		if(service.remove(id)) {
-			rttr.addFlashAttribute("result", id+" Deletion success");
+		if (service.remove(id)) {
+			rttr.addFlashAttribute("result", id + " Deletion success");
 		}
 		return "redirect:/board/list";
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

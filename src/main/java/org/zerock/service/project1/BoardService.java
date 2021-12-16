@@ -38,4 +38,12 @@ public class BoardService {
 	public Boolean updateViews(Integer id) {
 		return mapper.updateViews(id)==1;
 	}
+	
+//	public List<BoardVO> getListPaging() {
+//		return mapper.getListPaging();
+//	}
+//	
+//	public int getTotal() {
+//		return mapper.getTotal();
+//	}
 }
