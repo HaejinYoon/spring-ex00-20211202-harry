@@ -40,7 +40,7 @@ public class MemberController {
 			
 			if(ok) {
 				rttr.addFlashAttribute("result", "Sign-up Completed.");
-				return "redirect:/board/list";
+				return "redirect:/member/login";
 			}else {
 				return "redirect:member/signup";
 			}
@@ -74,8 +74,7 @@ public class MemberController {
 		// login success
 		session.setAttribute("loggedInMember", vo);
 		
-		System.out.println(session.getAttribute("loggedInMember"));
-		return "redirect:/board/list";
+		return "redirect:/board/home";
 		
 	}
 	
@@ -84,7 +83,7 @@ public class MemberController {
 		// 세션 invalidate
 		session.invalidate();
 		// /board/list redirect
-		return "redirect:/board/list";
+		return "redirect:/board/home";
 	}
 
 	@GetMapping("/info")
@@ -131,7 +130,7 @@ public class MemberController {
 		
 		rttr.addFlashAttribute("result", "Membership Expired");
 		
-		return "redirect:/board/list";
+		return "redirect:/board/home";
 	}
 	@GetMapping("/list")
 	public String list(@RequestParam(value="page", defaultValue="1")Integer page, Model model) {
