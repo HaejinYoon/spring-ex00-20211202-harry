@@ -21,15 +21,21 @@ body {
 <title>Home</title>
 </head>
 <body>
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-			<b:navBar></b:navBar>
-			<h1 class="display-4">Welcome to Haejin's Homepage</h1>
-			<p class="lead">This is a simple membership board system. Go to sign-up tab and write your first board!!</p>
-			<hr class="my-4">
-			<p>You can see, read a board without login</p>
-			<p>You can access the write board tab after you login.</p>
-			<p>If you haven't signed up yet, go to sign-up tab and signup!</p>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<b:navBar></b:navBar>
+				<div class="jumbotron jumbotron-fluid">
+					<div class="container">
+						<h1 class="display-4">Welcome to Haejin's Homepage</h1>
+						<p class="lead">This is a simple membership board system. Go to sign-up tab and write your first board!!</p>
+						<hr class="my-4">
+						<p>You can see, read a board without login</p>
+						<p>You can access the write board tab after you login.</p>
+						<p>If you haven't signed up yet, go to sign-up tab and signup!</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
