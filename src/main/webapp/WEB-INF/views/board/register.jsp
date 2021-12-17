@@ -56,6 +56,7 @@ body {
 
 
 					<button class="btn btn-outline-primary" type="submit">Register</button>
+					<a href="${pageContext.request.contextPath }/board/list"  class="btn btn-outline-secondary" >Cancel</a>					
 				</form>
 			</div>
 		</div>
