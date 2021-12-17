@@ -22,12 +22,11 @@ body {
 <title>Members List</title>
 </head>
 <body>
-	<b:navBar></b:navBar>
-
 	<!-- .container>.row>.col>h1{Members List} -->
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<b:navBar></b:navBar>
 				<h1>Members List</h1>
 				<%-- <h2>HI!, ${memberList.nickname }</h2> --%>
 				<!-- table.table>thead>tr>th*5^^tbody -->

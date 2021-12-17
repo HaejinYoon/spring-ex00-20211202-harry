@@ -26,12 +26,12 @@ body {
 <title>Write On Board</title>
 </head>
 <body>
-	<b:navBar></b:navBar>
 
 	<!-- .container>.row>.col>h1{게시물 작성} -->
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<b:navBar></b:navBar>
 				<h1>Fill in Board</h1>
 				<!-- form>.form-group*3>label[for=input$]+input.form-control#input$ -->
 				<form method="post">

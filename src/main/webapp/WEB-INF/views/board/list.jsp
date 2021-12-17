@@ -10,23 +10,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	background-color: ;
+	background-color:;
 }
 </style>
 <title>Board List</title>
 </head>
 <body>
-	<b:navBar></b:navBar>
 	<!-- .container>.orw>.col>h1{게시물 목록} -->
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<b:navBar></b:navBar>
 				<h1>Board List</h1>
 				<!-- table.table>thead>tr>th*4^^tbody -->
 				<table class="table table-hover table-bordered">
@@ -64,7 +64,9 @@ body {
 					</tbody>
 				</table>
 				<hr>
-				<a href="<%= request.getContextPath() %>/board/register" class="btn btn-primary"><i class="fas fa-pen-square"> Write </i></a>
+				<a href="<%=request.getContextPath()%>/board/register" class="btn btn-primary">
+					<i class="fas fa-pen-square"> Write </i>
+				</a>
 			</div>
 		</div>
 	</div>

@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
 body {
@@ -26,12 +26,11 @@ body {
 <title>Board Content</title>
 </head>
 <body>
-
-	<b:navBar></b:navBar>
 	<!-- .container>.row>.col>h1{게시물 조회} -->
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<b:navBar></b:navBar>
 				<h1>Board Content</h1>
 				<div class="row">
 					<div class="col-6">
@@ -63,7 +62,9 @@ body {
 					<!-- a.btn.btn-outline-secondary>i.far.fa-edit -->
 					<c:if test="${sessionScope.loggedInMember.id eq board.writer }">
 						<a href="modify?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">
-							<i class="fas fa-edit"> Modify</i> / <i class="fas fa-trash"> Delete</i>
+							<i class="fas fa-edit"> Modify</i>
+							/
+							<i class="fas fa-trash"> Delete</i>
 							<!-- <i class="far fa-edit"></i> -->
 						</a>
 					</c:if>

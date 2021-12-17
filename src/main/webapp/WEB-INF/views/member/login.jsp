@@ -22,12 +22,11 @@ body {
 <title>Login Page</title>
 </head>
 <body>
-	<b:navBar></b:navBar>
-
 	<!-- .container>.row>.col>h1{Log-in} -->
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<b:navBar></b:navBar>
 				<h1>Log-in</h1>
 				<!-- form>.form-group*2>label[for=input$]+input.form-control[name][required]^button.btn.btn-outline-primary{Log-in} -->
 				<form method="post">
