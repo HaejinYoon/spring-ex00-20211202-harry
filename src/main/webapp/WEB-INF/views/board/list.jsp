@@ -64,6 +64,7 @@ body {
 					</tbody>
 				</table>
 				<hr>
+				<a href="<%= request.getContextPath() %>/board/register" class="btn btn-primary"><i class="fas fa-pen-square"> Write </i></a>
 			</div>
 		</div>
 	</div>
