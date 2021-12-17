@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
 body {
@@ -38,7 +39,14 @@ body {
 				<form method="post">
 					<div class="form-group">
 						<label for="input1">ID</label>
-						<input type="text" class="form-control" id="input1" required name="id" value="${member.id }">
+						<!-- .input-group>.input-group-append>button.btn.btn-secondary#idCheckButton{Dup check} -->
+						<div class="input-group">
+							<input type="text" class="form-control" id="input1" required name="id" value="${member.id }">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" id="idCheckButton" type="button">Dup check</button>
+							</div>
+						</div>
+						<small id="IdCheckMessage" class="form-text"></small>
 					</div>
 					<div class="form-group">
 						<label for="input2">Password</label>
@@ -50,16 +58,16 @@ body {
 						<small id="passwordHelp" class="form-text text-muted">Password must be matched</small>
 					</div>
 					<div class="form-group">
+						<label for="input5">NickName</label>
+						<input type="text" class="form-control" id="input5" required name="nickname" value="${member.nickname }">
+					</div>
+					<div class="form-group">
 						<label for="input3">email</label>
 						<input type="email" class="form-control" id="input3" required name="email" value="${member.email }">
 					</div>
 					<div class="form-group">
 						<label for="input4">Address</label>
 						<input type="text" class="form-control" id="input4" required name="address" value="${member.address }">
-					</div>
-					<div class="form-group">
-						<label for="input5">NickName</label>
-						<input type="text" class="form-control" id="input5" required name="nickname" value="${member.nickname }">
 					</div>
 					<button class="btn btn-outline-primary" id="submitButton1">Sign-up</button>
 				</form>
@@ -68,7 +76,6 @@ body {
 	</div>
 
 
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 	<script>
@@ -78,22 +85,90 @@ body {
 			const passwordInput = $("#input2");
 			const passwordConfirmInput = $("#input6");
 			const submitButton = $("#submitButton1");
-
-			const confirmFunction = function() {
-				const passwordValue = passwordInput.val();
-				const passwordConfirmValue = passwordConfirmInput.val();
-
-				if (passwordValue === passwordConfirmValue) {
+			
+			// submit button 활성화 조건 변수
+			let idAble = false;
+			let passwordCheck = false;
+			
+			// submit 버튼 활성화 메소드
+			let enableSubmit = function() {
+				if(idAble && passwordCheck){
 					submitButton.removeAttr("disabled");
 				} else {
 					submitButton.attr("disabled", true);
 				}
 			};
+			
+			// ID 중복확인 버튼이 클릭되면
+			// ID Input요소에 입력된 값을 서버에 전송 후
+			// 응답받은 값에 따라서 
+			// 1> 서브밋 버튼 활성화 또는 비활성화
+			// 2> 사용 가능 또는 불가능 메시지 출력
+			
+			// context path
+			const appRoot ="${pageContext.request.contextPath}";
+			
+			$("#idCheckButton").click(function() {
+				$("#IdCheckMessage").attr("disabled", true);
+				const idValue=$("#input1").val().trim();
+				// 아이디 input에 입력이 안됬을 때 안내 메시지
+				if(idValue.trim()===""){
+					$("#IdCheckMessage").text("Please input ID you want.").removeClass("text-primary text-danger").addClass("text-warning");
+					$("#IdCheckMessage").removeAttr("disabled");
+					return;
+				}
+				$.ajax({
+					url : appRoot+"/member/idcheck",
+					data : {
+						id : idValue 
+					},
+					success : function(data){
+						switch(data){
+						case "able":
+							// 사용가능할 때
+							$("#IdCheckMessage").text("You can use this ID.").removeClass("text-danger text-warning").addClass("text-primary");
+							// submit 버튼 활성화 조건 추가
+							idAble = true;
+							break;
+						case "unable":
+							// 사용 불가능할 때
+							$("#IdCheckMessage").text("ID alread exists. Use different ID.").removeClass("text-primary text-warning").addClass("text-danger");
+							// submit 버튼 비활성화 조건 추가
+							idAble = false;
+							break;	
+						default:
+							break;
+						}
+					},
+					complete : function() {
+						enableSubmit(); // 조건이 충족되었을 때만 submit 버튼 활성화
+						$("#IdCheckMessage").removeAttr("disabled");
+					}
+					
+				})
+			})
+			
+			
+			
+			
+			
 
+			// 암호 input과 암호확인 input값 비교해서 서브밋 버튼 활성 비활성화
+			const confirmFunction = function() {
+				const passwordValue = passwordInput.val();
+				const passwordConfirmValue = passwordConfirmInput.val();
+
+				if (passwordValue === passwordConfirmValue) {
+					//submitButton.removeAttr("disabled");
+					passwordCheck = true;
+				} else {
+					//submitButton.attr("disabled", true);
+					passwordCheck = false;
+				}
+				enableSubmit(); // 조건이 충족되었을 때만 submit 버튼 활성화
+			};
 			submitButton.attr("disabled", true);
-
 			passwordInput.keyup(confirmFunction);
-
 			passwordConfirmInput.keyup(confirmFunction);
 
 		});

@@ -80,5 +80,10 @@ public class MemberService {
 
 				return pageInfo;
 	}
+
+	public boolean hasID(String id) {
+		MemberVO member = mapper.select(id);
+		return member != null;
+	}
 	
 }

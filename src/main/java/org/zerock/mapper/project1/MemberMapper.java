@@ -22,4 +22,5 @@ public interface MemberMapper {
 		
 	// 총 게시물 수
 	public Integer getCountRows();
+
 }
