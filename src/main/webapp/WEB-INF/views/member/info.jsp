@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
 body {
@@ -38,9 +39,10 @@ body {
 					<div class="form-group">
 						<label for="input2">Password</label>
 						<input type="password" required class="form-control" id="input2" name="password" value="${sessionScope.loggedInMember.password }">
+						<small id="PwCheckMessage" class="form-text"></small>
 					</div>
 					<div class="form-group">
-						<label for="input6">Password</label>
+						<label for="input6">Password Confirm</label>
 						<input type="password" required class="form-control" id="input6" aria-describedby="passwordHelp">
 						<small id="passwordHelp" class="form-text text-muted">Password must be matched</small>
 					</div>
@@ -54,15 +56,22 @@ body {
 					</div>
 					<div class="form-group">
 						<label for="input5">NickName</label>
-						<input type="text" required class="form-control" id="input5" name="nickname" value="${sessionScope.loggedInMember.nickname }">
-					</div>
+						<div class="input-group">
+							<input type="text" class="form-control" id="input5" required name="nickname" value="${sessionScope.loggedInMember.nickname }">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" id="nickNameCheckButton" type="button">Overlap Check</button>
+							</div>
+						</div>
+						<small id="nicknameHelp" class="form-text text-muted">If you want to use same, don't do overlap check.</small>
+						<small id="nicknameCheckMessage" class="form-text"></small>
+					</div>	
 					<div class="form-group">
 						<label for="input7">Joined us Since</label>
 						<input type="text" required class="form-control" id="input7" value="${sessionScope.loggedInMember.inserted }" readonly>
 					</div>
 					<!-- button.btn.btn-outline-secondary{Modify}+button.btn.btn-outline-danger{Delete} -->
-					<button class="btn btn-outline-secondary" id="modifyButton">Modify</button>
-					<button class="btn btn-outline-danger" id="removeButton">End Membership</button>
+					<button class="btn btn-secondary" id="modifyButton">Modify</button>
+					<button class="btn btn-danger" id="removeButton">End Membership</button>
 				</form>
 			</div>
 		</div>
@@ -70,7 +79,6 @@ body {
 
 
 
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function() {
@@ -90,28 +98,95 @@ body {
 					infoForm.submit();
 				}
 			})
-
-			//password confirm
+			// 두 개의 인풋요소의 값이 같을 때만 submit 버튼 활성화 
+			// 아니면 비활성화
 			const passwordInput = $("#input2");
 			const passwordConfirmInput = $("#input6");
 			const submitButton = $("#modifyButton");
-
-			const confirmFunction = function() {
-				const passwordValue = passwordInput.val();
-				const passwordConfirmValue = passwordConfirmInput.val();
-
-				if (passwordValue === passwordConfirmValue) {
+			
+			// submit button 활성화 조건 변수
+			let idAble = false;
+			let passwordCheck = false;
+			let nicknameAble = false;
+			
+			// submit 버튼 활성화 메소드
+			let enableSubmit = function() {
+				if(passwordCheck&& nicknameAble){
 					submitButton.removeAttr("disabled");
 				} else {
 					submitButton.attr("disabled", true);
 				}
 			};
-
-			submitButton.attr("disabled", true);
-
-			passwordInput.keyup(confirmFunction);
-
-			passwordConfirmInput.keyup(confirmFunction);
+			
+			// ID 중복확인 버튼이 클릭되면
+			// ID Input요소에 입력된 값을 서버에 전송 후
+			// 응답받은 값에 따라서 
+			// 1> 서브밋 버튼 활성화 또는 비활성화
+			// 2> 사용 가능 또는 불가능 메시지 출력
+			
+			// context path
+			const appRoot ="${pageContext.request.contextPath}"
+			
+			// nickname duplication check
+			$("#nickNameCheckButton").click(function() {
+				$("#nickNameCheckMessage").attr("disabled", true);
+				const nicknameValue=$("#input5").val().trim();
+				// nickname input에 입력이 안됬을 때 안내 메시지
+				if(nicknameValue.trim()===""){
+					$("#nicknameCheckMessage").text("Please input Nickname you want.").removeClass("text-primary text-danger").addClass("text-warning");
+					$("#nicknameCheckMessage").removeAttr("disabled");
+					return;
+				}
+				$.ajax({
+					url : appRoot+"/member/nickcheck",
+					data : {
+						nickname : nicknameValue 
+					},
+					success : function(data){
+						switch(data){
+						case "able":
+							// 사용가능할 때
+							$("#nicknameCheckMessage").text("You can use this Nickname.").removeClass("text-danger text-warning").addClass("text-primary");
+							// submit 버튼 활성화 조건 추가
+							nicknameAble = true;
+							break;
+						case "unable":
+							// 사용 불가능할 때
+							$("#nicknameCheckMessage").text("Nickname already exists. Use different Nickname.").removeClass("text-primary text-warning").addClass("text-danger");
+							// submit 버튼 비활성화 조건 추가
+							nicknameAble = false;
+							break;	
+						default:
+							break;
+						}
+					},
+					complete : function() {
+						enableSubmit(); // 조건이 충족되었을 때만 submit 버튼 활성화
+						$("#nicknameCheckMessage").removeAttr("disabled");
+					}
+				});
+			});
+			// 암호 input과 암호확인 input값 비교해서 서브밋 버튼 활성 비활성화
+			$("#input6").keyup(function() {
+				const confirmFunction = function() {
+					const passwordValue = passwordInput.val();
+					const passwordConfirmValue = passwordConfirmInput.val();
+	
+					if (passwordValue === passwordConfirmValue) {
+						//submitButton.removeAttr("disabled");
+						$("#PwCheckMessage").text("Password matches.").removeClass("text-danger text-warning").addClass("text-primary");
+						passwordCheck = true;
+					} else {
+						//submitButton.attr("disabled", true);
+						$("#PwCheckMessage").text("Password doesn't match.").removeClass("text-primary text-warning").addClass("text-danger");
+						passwordCheck = false;
+					}
+					enableSubmit(); // 조건이 충족되었을 때만 submit 버튼 활성화
+				};
+				submitButton.attr("disabled", true);
+				passwordInput.keyup(confirmFunction);
+				passwordConfirmInput.keyup(confirmFunction);
+			});
 		});
 	</script>
 </body>

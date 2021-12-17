@@ -20,7 +20,10 @@ public interface MemberMapper {
 	// Pagination
 	public List<MemberVO> getListPage(@Param("from") Integer from, @Param("items") Integer numberPerPage, Integer numberPerPagination);
 		
-	// 총 게시물 수
+	// 총 회원 수
 	public Integer getCountRows();
+	
+	// nickname으로 회원 검색
+	public MemberVO selectByNickname(String nickname);
 
 }

@@ -18,11 +18,9 @@ public class MemberService {
 	public boolean register(MemberVO member) {
 		try {
 			return mapper.insert(member) ==1;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return false;
 	}
 	
@@ -85,5 +83,14 @@ public class MemberService {
 		MemberVO member = mapper.select(id);
 		return member != null;
 	}
+
+	public boolean hasNick(String nickname) {
+		MemberVO member = mapper.selectByNickname(nickname);
+		return member != null;
+	}
 	
+	public MemberVO hasNickinfo(String nickname) {
+		MemberVO member = mapper.selectByNickname(nickname);
+		return member;
+	}
 }

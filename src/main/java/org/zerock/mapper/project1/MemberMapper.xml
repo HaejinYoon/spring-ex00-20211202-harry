@@ -84,7 +84,13 @@
 	SELECT id, password, email, address, inserted, nickName, adminQuali
 	FROM Member
 	WHERE id = #{id}
-	</select>
+</select>
+
+<select id="selectByNickname" resultType="org.zerock.domain.project1.MemberVO">
+  SELECT id, password, email, address, inserted, nickName, adminQuali
+  FROM Member
+  WHERE nickName = #{nickname}
+</select>
 
 </mapper>
 

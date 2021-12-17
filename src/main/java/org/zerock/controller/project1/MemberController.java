@@ -37,10 +37,33 @@ public class MemberController {
 		}else {
 			return "able";
 		}
-		
 	}
 	
+	@RequestMapping("/nickcheck")
+	@ResponseBody
+	public String nickcheck(String nickname) {
+		boolean has = service.hasNick(nickname);
+		if (has) {			
+			return "unable";
+		}else {
+			return "able";
+		}
+	}
 	
+	@RequestMapping("/nickcheckinfo")
+	@ResponseBody
+	public String nickcheckinfo(String nickname, MemberVO member) {
+		boolean has = service.hasNick(nickname);
+		if (has) {
+			if(nickname.equals(member.getNickname())) {
+				return "unable";
+			}else {
+				return "able";
+			}
+		}else {
+			return "able";
+		}
+	}
 	
 	@GetMapping("/signup")
 	public void signup() {
