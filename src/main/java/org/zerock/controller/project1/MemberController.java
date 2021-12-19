@@ -52,13 +52,13 @@ public class MemberController {
 	
 	@RequestMapping("/nickcheckinfo")
 	@ResponseBody
-	public String nickcheckinfo(String nickname, MemberVO member) {
+	public String nickcheckinfo(String nickname, String nicknameOriginal, MemberVO member) {
 		boolean has = service.hasNick(nickname);
 		if (has) {
-			if(nickname.equals(member.getNickname())) {
-				return "unable";
-			}else {
+			if(nicknameOriginal.equals(member.getNickname())) { // 원래 닉네임과 같으면 쓸수 있으면 
 				return "able";
+			}else {
+				return "unable";
 			}
 		}else {
 			return "able";
@@ -81,7 +81,7 @@ public class MemberController {
 				rttr.addFlashAttribute("result", "Sign-up Completed.");
 				return "redirect:/member/login";
 			}else {
-				return "redirect:member/signup";
+				return "redirect:/member/signup";
 			}
 		} else {
 			model.addAttribute("alertMessage", "ID is already exists.");
