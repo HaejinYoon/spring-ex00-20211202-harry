@@ -40,7 +40,7 @@ body {
 						<label for="input1">ID</label>
 						<!-- .input-group>.input-group-append>button.btn.btn-secondary#idCheckButton{Dup check} -->
 						<div class="input-group">
-							<input type="text" class="form-control" id="input1" required name="id" value="${member.id }">
+							<input type="text" class="form-control" id="input1" required name="id" value="${member.id }" pattern="^([a-z0-9_]){6,50}$">
 							<div class="input-group-append">
 								<button class="btn btn-secondary" id="idCheckButton" type="button">Overlap Check</button>
 							</div>
@@ -54,7 +54,7 @@ body {
 					</div>
 					<div class="form-group">
 						<label for="input6">Password Confirm</label>
-						<input type="password" class="form-control" id="input6" aria-describedby="passwordHelp">
+						<input type="password" class="form-control" id="input6" required aria-describedby="passwordHelp">
 						<small id="passwordHelp" class="form-text text-muted">Password must be matched</small>
 					</div>
 					<div class="form-group">
@@ -153,36 +153,52 @@ body {
 					}
 				});
 			});
+			$("#input1").keyup(function() {
+				idAble = false;
+				$("#IdCheckMessage")
+				.text("Check the ID again.")
+				.removeClass("text-primary text-danger")
+				.addClass("text-warning");
+				enableSubmit();
+			});
 			
-			// nickname duplication check
-			$("#nickNameCheckButton").click(function() {
-				$("#nickNameCheckMessage").attr("disabled", true);
-				const nicknameValue=$("#input5").val().trim();
+			// nickname duplication check method
+			const nickDupCheck = function() {
+				const nicknameValue = $("#input5").val().trim();
 				// nickname input에 입력이 안됬을 때 안내 메시지
-				if(nicknameValue.trim()===""){
-					$("#nicknameCheckMessage").text("Please input Nickname you want.").removeClass("text-primary text-danger").addClass("text-warning");
+				if (nicknameValue.trim() === "") {
+					$("#nicknameCheckMessage")
+						.text("Please input Nickname you want.")
+						.removeClass(	"text-primary text-danger")
+						.addClass("text-warning");
 					$("#nicknameCheckMessage").removeAttr("disabled");
 					return;
 				}
 				$.ajax({
-					url : appRoot+"/member/nickcheck",
+					url : appRoot + "/member/nickcheck",
 					data : {
-						nickname : nicknameValue 
+						nickname : nicknameValue,
 					},
-					success : function(data){
-						switch(data){
+					success : function(data) {
+						switch (data) {
 						case "able":
 							// 사용가능할 때
-							$("#nicknameCheckMessage").text("You can use this Nickname.").removeClass("text-danger text-warning").addClass("text-primary");
+							$("#nicknameCheckMessage")
+								.text("You can use this Nickname.")
+								.removeClass("text-danger text-warning")
+								.addClass("text-primary");
 							// submit 버튼 활성화 조건 추가
 							nicknameAble = true;
 							break;
 						case "unable":
 							// 사용 불가능할 때
-							$("#nicknameCheckMessage").text("Nickname already exists. Use different Nickname.").removeClass("text-primary text-warning").addClass("text-danger");
+							$("#nicknameCheckMessage")
+								.text("Nickname already exists. Use different Nickname.")
+								.removeClass("text-primary text-warning")
+								.addClass("text-danger");
 							// submit 버튼 비활성화 조건 추가
 							nicknameAble = false;
-							break;	
+							break;
 						default:
 							break;
 						}
@@ -192,9 +208,24 @@ body {
 						$("#nicknameCheckMessage").removeAttr("disabled");
 					}
 				});
+			}
+			// nickname duplication check
+			$("#nickNameCheckButton").click(function() {
+				nickDupCheck();
 			});
+
+			$("#input5").keyup(function() {
+				nicknameAble = false;
+				$("#nicknameCheckMessage")
+				.text("Check the nickname again.")
+				.removeClass("text-primary text-danger")
+				.addClass("text-warning");
+				enableSubmit();
+			});
+			
 			// 암호 input과 암호확인 input값 비교해서 서브밋 버튼 활성 비활성화
 			$("#input6").keyup(function() {
+				checkPw();
 				const confirmFunction = function() {
 					const passwordValue = passwordInput.val();
 					const passwordConfirmValue = passwordConfirmInput.val();
@@ -214,10 +245,37 @@ body {
 				passwordInput.keyup(confirmFunction);
 				passwordConfirmInput.keyup(confirmFunction);
 			});
+			const checkPw = function() {
+	            var pw = document.getElementById('input2').value;
+	            var SC = ["!","@","#","$","%"];
+	            var check_SC = 0;
+	 
+	            if(input2.length < 6 || input2.length>16){
+	                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
+	                document.getElementById('input2').value='';
+	            }
+	            for(var i=0;i<SC.length;i++){
+	                if(pw.indexOf(SC[i]) != -1){
+	                    check_SC = 1;
+	                }
+	            }
+	            if(check_SC == 0){
+	                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
+	                document.getElementById('input2').value='';
+	            }
+	            if(document.getElementById('input2').value !='' && document.getElementById('input2').value!=''){
+	                if(document.getElementById('input2').value==document.getElementById('input2').value){
+	                    document.getElementById('input6').innerHTML='비밀번호가 일치합니다.'
+	                    document.getElementById('input6').style.color='blue';
+	                }
+	                else{
+	                    document.getElementById('input6').innerHTML='비밀번호가 일치하지 않습니다.';
+	                    document.getElementById('input6').style.color='red';
+	                }
+	            }
+	        }
 
 		});
-
-		
 	</script>
 </body>
 </html>
