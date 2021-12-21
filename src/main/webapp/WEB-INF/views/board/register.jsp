@@ -31,7 +31,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar active="list"></b:navBar>
+				<b:navBar active="register"></b:navBar>
 				<h1>Fill in Board</h1>
 				<!-- form>.form-group*3>label[for=input$]+input.form-control#input$ -->
 				<form method="post">
