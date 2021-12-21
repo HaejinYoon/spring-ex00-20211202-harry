@@ -26,7 +26,7 @@ body, input{
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar></b:navBar>
+				<b:navBar active="login"></b:navBar>
 				<h1>Log-in</h1>
 				<!-- form>.form-group*2>label[for=input$]+input.form-control[name][required]^button.btn.btn-outline-primary{Log-in} -->
 				<form method="post">

@@ -27,7 +27,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar></b:navBar>
+				<b:navBar active="memberInfo"></b:navBar>
 				<h1>Member Information</h1>
 				<!-- form>.form-group*4>label[for=input$]+input.form-control[name][value] -->
 				<form method="post" id="infoForm">

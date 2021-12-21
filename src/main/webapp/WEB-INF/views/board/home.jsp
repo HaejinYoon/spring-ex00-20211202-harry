@@ -24,7 +24,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar></b:navBar>
+				<b:navBar active="home"></b:navBar>
 				<div class="jumbotron jumbotron-fluid">
 					<div class="container">
 						<h1 class="display-4">Welcome to Haejin's Homepage</h1>

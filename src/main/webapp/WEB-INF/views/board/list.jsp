@@ -26,7 +26,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar></b:navBar>
+				<b:navBar active="list"></b:navBar>
 				<h1>Board List</h1>
 				<!-- table.table>thead>tr>th*4^^tbody -->
 				<table class="table table-hover table-bordered">

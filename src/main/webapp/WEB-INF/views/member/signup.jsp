@@ -27,7 +27,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar></b:navBar>
+				<b:navBar active="signup"></b:navBar>
 				<h1>Sign-up Form</h1>
 
 				<c:if test="${not empty alertMessage}">

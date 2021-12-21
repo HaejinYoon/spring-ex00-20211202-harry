@@ -87,7 +87,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<b:navBar></b:navBar>
+				<b:navBar active="list"></b:navBar>
 				<h1>Board Content</h1>
 				<div class="row">
 					<div class="col-6">
