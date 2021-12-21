@@ -4,22 +4,17 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-
-
 import lombok.Data;
 
 @Data
-public class BoardVO {
+public class ReplyVO {
 	private Integer id;
-	private String title;
-	private String content;
-	private String writer;
-	//@JsonFormat(shape = Shape.STRING)
+	private Integer boardId;
+	private String memberId;
+	private String reply;
 	private LocalDateTime inserted;
-	//@JsonFormat(shape = Shape.STRING)
 	private LocalDateTime updated;
 	private String nickName;
-	private Integer views;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -55,5 +50,3 @@ public class BoardVO {
 		}
 	}
 }
-
-

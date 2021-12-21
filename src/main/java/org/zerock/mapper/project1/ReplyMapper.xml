@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.project1.ReplyMapper">
+
+<insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+INSERT INTO Reply (boardId, memberId, reply)
+VALUES (#{boardId}, #{memberId}, #{reply})
+
+</insert>
+
+<select id="list" resultType="org.zerock.domain.project1.ReplyVO">
+
+SELECT
+ 	r.id,
+	r.boardId,
+	r.memberId,
+	r.reply,
+	r.inserted,
+	r.updated,
+	m.nickName
+FROM
+	Reply r
+JOIN
+	Member m
+ON
+	r.memberId = m.id
+WHERE
+	r.boardId = #{boardId}
+ORDER BY
+	r.id DESC
+</select>
+
+
+
+
+
+
+
+</mapper>
