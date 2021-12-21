@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 import lombok.Data;
 
 @Data
@@ -12,7 +15,9 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String writer;
+	//@JsonFormat(shape = Shape.STRING)
 	private LocalDateTime inserted;
+	//@JsonFormat(shape = Shape.STRING)
 	private LocalDateTime updated;
 	private String nickName;
 	private Integer views;
