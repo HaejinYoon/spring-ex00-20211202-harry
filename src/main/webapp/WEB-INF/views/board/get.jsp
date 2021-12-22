@@ -30,16 +30,113 @@ $(document).ready(function(){
 						<div class="media-body">
 							<h5 class="mt-0"><i class="far fa-comment"></i>
 							<span class="reply-nickName"></span>가
-							\${list[i].inserted}에 작성</h5>
-							<p class="reply-body"></p>
+							\${list[i].inserted}에 작성 
+							</h5>
+							<p class="reply-body" style="white-space: pre;"></p>
+							
+							<div class="input-group" style="display:none;">
+							<textarea id="replyTextarea\${list[i].id}" class="form-control"></textarea>
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary cancel-button"><i class="fas fa-ban"></i></button>
+									<button class="btn btn-outline-secondary" id="sendReply\${list[i].id}">
+										<i class="far fa-comment-dots fa-lg"></i>
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>`);
+					
+					replyMediaObject.find("#sendReply" + list[i].id).click(function() {
+						const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
+						const data =  {
+								reply : reply		
+						};
+						$.ajax({
+							url : appRoot + "/reply/" + list[i].id,
+							type : "put",
+							contentType : "application/json",
+							data : JSON.stringify(data),
+							complete : function() {
+								listReply();
+							}
+						});
+					});
+					
 					replyMediaObject.find(".reply-nickName").text(list[i].nickName);
 					replyMediaObject.find(".reply-body").text(list[i].reply);
+					replyMediaObject.find(".form-control").text(list[i].reply);
+					replyMediaObject.find(".cancel-button").click(function() {
+						replyMediaObject.find(".reply-body").show();
+						replyMediaObject.find(".input-group").hide();
+						replyMediaObject.find("#replyModify").show();
+					});
+					
+					if (list[i].own) {
+						// 본인이 작성한 것만 수정버튼 추가
+						const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
+			        	modifyButton.click(function() {
+			        		$(this).parent().find('.reply-body').hide();// this는 클릭이벤트가 발생한 버튼
+			        		$(this).parent().find('.input-group').show();
+			        		$(this).parent().find('#replyModify').hide();
+			        	});
+						replyMediaObject.find(".media-body").append(modifyButton);
+						
+						// 삭제버튼도 추가
+						const removeButton = $("<button class='btn btn-outline-danger'>	<i class='far fa-trash-alt'></i></button>");
+						removeButton.click(function(){
+							if (confirm("Do you want to delete?")){
+								$.ajax({
+									url : appRoot +"/reply/"+list[i].id,
+									type : "delete",
+									complete : function(){
+										listReply();
+									}
+								})
+							}
+						})
+						replyMediaObject.find(".media-body").append(removeButton);
+			        }
 					
 					$("#replyListContainer").append(replyMediaObject);
 				};
 			}
+			/*
+			complete : function (list){
+				<button id="replyDelete" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+			// 수정버튼을 눌렀을 때
+			$("#replyModify").click(function() {
+				const reply =$("#replyBody").val();
+				const memberId = '${sessionScope.loggedInMember.id}';
+				const boardId = '${board.id}';
+				const id = $("#replyId").val();
+				const data = {
+						reply : reply,
+						id : id,
+						memberId : memberId,
+						boardId : boardId
+				};
+				
+				$.ajax({
+					url : appRoot+"/reply/modify",
+					type : "get",
+					data : data,
+					success : function() {
+						const replyMediaObject = $(`
+								<hr>
+									<div class="input-group">
+									<textarea id="replyTextarea" class="form-control" value="${reply}"></textarea>
+									<div class="input-group-append">
+										<button class="btn btn-outline-secondary" id="sendReply">
+											<i class="far fa-comment-dots fa-lg"></i>
+										</button>
+									</div>
+								</div>`);
+								
+								$(".media-body").append(replyMediaObject);
+					}
+				})
+			})// 수정 버튼 눌렀을 때
+			} */	
 		})
 	};
 	listReply(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
@@ -59,13 +156,21 @@ $(document).ready(function(){
 			type : "post",
 			data : data,
 			success : function() {
-				// list refresh
-				listReply();
 				// textarea reset
 				$("#replyTextarea").val(""); 
+			},
+			error : function(){
+				alert("Logged out! Please log in again!");
+			},
+			complete : function() {
+				// list refresh
+				listReply();
 			}
 		})
-	})
+	})//댓글전송
+	
+	
+	
 })
 </script>
 

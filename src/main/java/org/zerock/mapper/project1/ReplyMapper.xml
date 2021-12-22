@@ -3,6 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.project1.ReplyMapper">
+<delete id="delete">
+	DELETE FROM Reply WHERE id=#{id}
+</delete>
+<update id="update">
+UPDATE Reply
+SET
+	reply = #{reply},
+	updated = NOW()
+WHERE
+	id=#{id}
+</update>
+
+<select id="selectById" resultType="org.zerock.domain.project1.ReplyVO">
+SELECT id, boardId, memberId, reply, inserted, updated
+FROM Reply
+WHERE id = #{id}
+</select>
 
 <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 INSERT INTO Reply (boardId, memberId, reply)
