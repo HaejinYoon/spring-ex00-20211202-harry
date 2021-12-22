@@ -30,6 +30,8 @@ public interface BoardMapper {
 	
 	// 총 게시물 수
 	public Integer getCountRows();
+
+	public int deleteByMemberId(String memberId);
 	
 //	//pagination
 //	public List<BoardVO> getListPaging();
