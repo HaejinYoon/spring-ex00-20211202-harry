@@ -84,3 +84,7 @@ SELECT * FROM Member;
   LIMIT 0, 10;
   
   select count(id) from Member;
+  
+   SELECT id, password, email, address, inserted, nickName, adminQuali
+  FROM Member
+  WHERE nickName = 'Super Administrator';

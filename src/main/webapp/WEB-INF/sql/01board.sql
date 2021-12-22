@@ -43,12 +43,17 @@ INSERT INTO Board (title, content, writer)
     	b.inserted,
     	b.updated,
     	b.views,
-    	m.nickName
+    	m.nickName,
+        count(r.id) replyCount
 	FROM
     	Board b
     JOIN
     	Member m ON b.writer = m.id
-	ORDER BY id DESC
+	LEFT JOIN
+		Reply r ON b.id = r.boardId
+	GROUP by b.id
+    ORDER BY b.id DESC
+    
     LIMIT 0, 10 ;
     -- from(0 index), number
     -- page 1 : 0,10
