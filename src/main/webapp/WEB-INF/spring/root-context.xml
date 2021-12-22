@@ -9,23 +9,33 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<context:property-placeholder location="classpath:db.properties"/>
-	
+	<context:property-placeholder
+		location="classpath:db.properties" />
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		<bean id="dataSource" class="org.mariadb.jdbc.MariaDbPoolDataSource" destroy-method="close">
-			<property name="url" value="${db.url}"></property>
-			<property name="user" value="${db.user}"></property>
-			<property name="password" value="${db.password}"></property>
-			<property name="maxPoolSize" value="1"></property>
-		</bean>
-		
-		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSource"></property>
-		</bean>
-		
-		<context:component-scan base-package="org.zerock.service"></context:component-scan>
-		
-		<mybatis-spring:scan base-package="org.zerock.mapper"/>
-		
-		<tx:annotation-driven/>
+	<bean id="dataSource"
+		class="org.mariadb.jdbc.MariaDbPoolDataSource" destroy-method="close">
+		<property name="url" value="${db.url}"></property>
+		<property name="user" value="${db.user}"></property>
+		<property name="password" value="${db.password}"></property>
+		<property name="maxPoolSize" value="1"></property>
+	</bean>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<context:component-scan
+		base-package="org.zerock.service"></context:component-scan>
+
+	<mybatis-spring:scan
+		base-package="org.zerock.mapper" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven />
 </beans>
