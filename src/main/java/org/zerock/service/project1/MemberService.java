@@ -24,6 +24,9 @@ public class MemberService {
 	@Setter(onMethod_ = @Autowired)
 	private ReplyMapper replyMapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private BoardService boardService;
+	
 	public boolean register(MemberVO member) {
 		try {
 			return mapper.insert(member) ==1;
@@ -46,6 +49,15 @@ public class MemberService {
 		// 1. 멤버가 작성한 댓글 지우기
 		replyMapper.deleteByMemberId(id);
 		// 2. 멤버가 작성한 게시물 지우기
+		// 2.1 멤버가 작성한 게시물 목록을 얻고
+		Integer[] boardIds = boardMapper.selectByMemberId(id);
+		
+		// 2.2 게시물 삭제
+		if (boardIds != null) {
+			for(Integer boardId : boardIds) {
+				boardService.remove(boardId);
+			}
+		}
 		boardMapper.deleteByMemberId(id);
 		// 3. 멤버 지우기
 		return mapper.delete(id) == 1;

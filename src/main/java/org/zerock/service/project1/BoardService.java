@@ -28,7 +28,7 @@ public class BoardService {
 	@Setter(onMethod_ = @Autowired)
 	private FileMapper fileMapper;
 	
-	private String staticRoot = "C:\\Users\\Haejin\\Desktop\\course\\fileupload\\";
+	private String staticRoot = "C:\\Users\\Haejin\\Desktop\\course\\fileupload\\board\\";
 	
 	public boolean register(BoardVO board) {
 		return mapper.insert(board) == 1;
@@ -46,8 +46,21 @@ public class BoardService {
 	public boolean remove(Integer id) {
 		// 1. 게시물 달린 댓글 지우기
 		replyMapper.deleteByBoardId(id);
-		
-		// 2. 게시물 지우기
+		// 2. 파일 지우기
+		// file system에서 삭제
+		String[] files = fileMapper.selectNamesByBoardId(id);
+		if(files !=null) {
+			for (String file : files) {
+				String path = staticRoot+id+"\\"+file;
+				File target = new File(path);
+				if(target.exists()) {
+					target.delete();
+				}
+			}
+		}
+		// db에서 삭제
+		fileMapper.deleteByBoardId(id);
+		// 3. 게시물 지우기
 		return mapper.delete(id) == 1;
 	}
 
@@ -105,10 +118,12 @@ public class BoardService {
 		
 		// write files
 		String basePath = staticRoot + board.getId();
-		
-		// 1. 새 게시물 id 이름의 folder 만들기
-		File newFolder = new File(basePath);
-		newFolder.mkdirs();
+		if(files[0].getSize()>0) {
+			// files가 있을 때만 폴더 생성
+			// 1. 새 게시물 id 이름의 folder 만들기
+			File newFolder = new File(basePath);
+			newFolder.mkdirs();
+		}
 		// 2. 위 폴더에 files 쓰기
 		for (MultipartFile file : files) {
 			if(file != null && file.getSize()>0) {
@@ -126,9 +141,31 @@ public class BoardService {
 	}
 
 	@Transactional
-	public boolean modify(BoardVO board, MultipartFile[] files) throws IllegalStateException, IOException {
+	public boolean modify(BoardVO board, String[] removeFile, MultipartFile[] files) throws IllegalStateException, IOException {
 		modify(board);
-		
+		// write files
+		String basePath = staticRoot + board.getId();
+		// 파일 삭제
+		if(removeFile != null) {
+			for (String removeFileName : removeFile) {
+				// file system에서 삭제
+				String path = basePath + "\\"+removeFileName;
+				File target = new File(path);
+				if(target.exists()) {
+					target.delete();
+				}
+				
+				// db table에서 삭제
+				fileMapper.delete(board.getId(), removeFileName);
+			}			
+		}
+		// 새 파일 추가
+		if(files[0].getSize()>0) {
+			// files가 있을 때만 폴더 생성
+			// 1. 새 게시물 id 이름의 folder 만들기
+			File newFolder = new File(basePath);
+			newFolder.mkdirs();
+		}
 		for(MultipartFile file : files) {
 			if(file != null && file.getSize()>0) {
 				// 1. write file to filesystem				

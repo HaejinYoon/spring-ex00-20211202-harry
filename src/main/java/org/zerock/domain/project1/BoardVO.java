@@ -22,6 +22,8 @@ public class BoardVO {
 	private Integer views;
 	private Integer replyCount;
 	
+	private Boolean hasFile;
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}

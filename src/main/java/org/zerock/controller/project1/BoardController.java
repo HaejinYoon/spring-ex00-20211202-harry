@@ -1,6 +1,7 @@
 package org.zerock.controller.project1;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,14 +84,18 @@ public class BoardController {
 	@GetMapping("/modify")
 	public void get2(@RequestParam("id") Integer id, @RequestParam("page") Integer page, Model model) {
 		BoardVO board = service.get(id);
+		
+		String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
 		model.addAttribute("currentPage", page);
+		model.addAttribute("fileNames", fileNames);
 	}
 
 	@PostMapping("/modify")
-	public String modify(BoardVO board, MultipartFile[] files, RedirectAttributes rttr, PageInfoVO page) {
+	public String modify(BoardVO board, String[] removeFile,  MultipartFile[] files, RedirectAttributes rttr, PageInfoVO page) {
+		System.out.println(Arrays.toString(removeFile));
 		try {
-			if (service.modify(board, files)) {
+			if (service.modify(board, removeFile, files)) {
 				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
 			}
 		} catch (IllegalStateException | IOException e) {
