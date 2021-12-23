@@ -30,6 +30,9 @@ nav {
 	border-radius: 7px;
 	color : white;
 }
+h5 {
+	margin-bottom: 0px;
+}
 </style>
 
 <nav id="myNAV" class="navbar navbar-expand-lg bg-dark">
