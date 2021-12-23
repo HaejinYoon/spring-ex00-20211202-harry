@@ -57,9 +57,8 @@ body {
 						<label for="input5">NickName</label>
 						<div class="input-group">
 							<input type="text" class="form-control" id="input5" required name="nickname" value="${sessionScope.loggedInMember.nickname }">
-							<input type="hidden" id="input8" name="nicknameOriginal" value="${sessionScope.loggedInMember.nickname }">
 							<div class="input-group-append">
-								<button class="btn btn-secondary" id="nickNameCheckButton" type="button">Overlap Check</button>
+								<button class="btn btn-secondary" id="nickNameCheckButton" type="button" disabled="disabled">Overlap Check</button>
 							</div>
 						</div>
 						<small id="nicknameHelp" class="form-text text-muted">If you want to use same, don't do overlap check.</small>
@@ -125,9 +124,10 @@ body {
 			const appRoot = "${pageContext.request.contextPath}"
 			
 			// nickname duplication check method
+			const nicknameValueOld = $("#input5").val().trim();
 			const nickDupCheck = function() {
 				const nicknameValue = $("#input5").val().trim();
-				const nicknameOriginalValue = $("#input8").val().trim();
+				
 				// nickname input에 입력이 안됬을 때 안내 메시지
 				if (nicknameValue.trim() === "") {
 					$("#nicknameCheckMessage")
@@ -138,10 +138,9 @@ body {
 					return;
 				}
 				$.ajax({
-					url : appRoot + "/member/nickcheckinfo",
+					url : appRoot + "/member/nickcheck",
 					data : {
 						nickname : nicknameValue,
-						nicknameOriginal : nicknameOriginalValue,
 					},
 					success : function(data) {
 						switch (data) {
@@ -179,12 +178,23 @@ body {
 			});
 
 			$("#input5").keyup(function() {
-				nicknameAble = false;
-				$("#nicknameCheckMessage")
-				.text("Check the nickname again.")
-				.removeClass("text-primary text-danger")
-				.addClass("text-warning");
-				enableSubmit();
+				if(nicknameValueOld==$("#input5").val().trim()) {
+					console.log($("#input5").val().trim());
+					nicknameAble = true;
+					$("#nicknameCheckMessage")
+					.text("You can use this Nickname.")
+					.removeClass("text-danger text-warning")
+					.addClass("text-primary");
+					$("#nickNameCheckButton").attr("disabled", true);
+				} else {
+					nicknameAble = false;
+					$("#nicknameCheckMessage")
+					.text("Check the nickname again.")
+					.removeClass("text-primary text-danger")
+					.addClass("text-warning");
+					$("#nickNameCheckButton").removeAttr("disabled");
+					enableSubmit();
+				}
 
 			});
 			
