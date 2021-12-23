@@ -22,7 +22,7 @@
   border-radius: 7px;
 }
 a:hover {
-	color:white;
+	color:darkred;
 }
 nav {
 	font-family: Arial, Helvetica, sans-serif;
