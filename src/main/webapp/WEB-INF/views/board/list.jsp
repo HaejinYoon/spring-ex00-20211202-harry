@@ -18,6 +18,38 @@ body {
 	font-size: 14px;
 	background-color:;
 }
+.num {
+	width : 40px;
+	text-align : center;
+}
+.title{
+	width : 400px;
+	text-align : center;
+}
+.writer {
+	width : 70px;
+	text-align : center;
+}
+.date, .m-date{
+	width : 80px;
+	text-align : center;
+}
+.views{
+	width : 60px;
+	text-align : center;
+}
+td { 
+	vertical-align: middle; 
+	
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+	text-align : center;
+}
+.bTitle{
+	text-align : left
+}
+
 </style>
 <title>Board List</title>
 </head>
@@ -29,29 +61,32 @@ body {
 				<b:navBar active="list"></b:navBar>
 				<h1>Board List</h1>
 				<!-- table.table>thead>tr>th*4^^tbody -->
-				<table class="table table-hover table-bordered">
+				<table class="table table-hover table-bordered " style="table-layout: fixed;">
 					<thead class="thead-dark">
 						<tr>
-							<th>
+							<th class="num">
 								<i class="fab fa-slack-hash"></i>
 							</th>
-							<th>Title</th>
-							<th>
+							<th class="title">Title</th>
+							<th class="writer">
 								<i class="fas fa-user"></i>
 							</th>
-							<th>Date</th>
-							<th>Modified Date</th>
-							<th>Views</th>
+							<th class="date">Date</th>
+							<th class="m-date">Modified Date</th>
+							<th class="views">Views</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="board">
 							<tr>
 								<td>${board.id }</td>
-								<td>
+								<td class="bTitle">
 									<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
 										<c:out value="${board.title }" />
 									</a>
+									<c:if test="${board.hasFile }">
+										<i class="far fa-images"></i>
+									</c:if>
 									<c:if test="${board.replyCount>0 }">
 										<i class="far fa-comments"> ${board.replyCount }</i>
 									</c:if>
@@ -126,6 +161,7 @@ body {
 			</c:if>
 		</ul>
 	</nav>
+	<b:copyright></b:copyright>
 	<!-- modal -->
 	<c:if test="${not empty result }">
 		<div class="modal" tabindex="-1" id="modal1">

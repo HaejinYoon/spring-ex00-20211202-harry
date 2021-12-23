@@ -21,6 +21,10 @@ body {
 #input2 {
 	height: 300px;
 }
+
+.button-group {
+	margin-bottom: 100px;
+}
 </style>
 
 <title>Board Modification</title>
@@ -43,12 +47,36 @@ body {
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
 					</div>
-					
+					<table class="table table-hover table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th>Select files to delete</th>
+								<th>Images</th>
+							</tr>
+						</thead>
+						<c:forEach items="${fileNames }" var="fileName">
+							<tbody>
+								<tr>
+									<td>
+										<div class="col d-flex justify-content-center align-items-center">
+											<input class="check" type="checkbox" name="removeFile" value="${fileName }">
+										</div>
+									</td>
+									<td>
+										<div class="col">
+											<img class="img-fluid" src="/static/board/${board.id }/${fileName }" alt="${fileName }">
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+
 					<div class="form-group">
 						<label for="input4">Image</label>
 						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<input type="text" class="form-control" id="input3" value="${board.nickName }" readonly>
@@ -57,13 +85,15 @@ body {
 					<input type="hidden" name="currentPage" value="${currentPage}">
 					<!-- button.btn.btn-outline-danger{Delete} -->
 				</form>
-				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">
-					<i class="fas fa-edit"> Modify</i>
-				</button>
-				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1">
-					<i class="fas fa-trash"> Delete</i>
-				</button>
-				<a href="${pageContext.request.contextPath }/board/get?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">Cancel</a>
+				<div class="button-group">
+					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">
+						<i class="fas fa-edit"> Modify</i>
+					</button>
+					<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1">
+						<i class="fas fa-trash"> Delete</i>
+					</button>
+					<a href="${pageContext.request.contextPath }/board/get?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">Cancel</a>
+				</div>
 			</div>
 		</div>
 	</div>

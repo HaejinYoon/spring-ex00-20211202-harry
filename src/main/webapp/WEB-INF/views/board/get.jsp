@@ -22,22 +22,25 @@ body {
 #input2 {
 	height: 300px;
 }
-#replyTextarea, #sendReply{
-	margin-bottom:10px;
+
+#replyTextarea, #sendReply {
+	margin-bottom: 10px;
 }
 
-p, .reply-body{
-	margin-bottom:0px;
+p, .reply-body {
+	margin-bottom: 0px;
 }
-.reply-header{
-	height : 20px;
+
+.reply-header {
+	height: 20px;
 }
+
 textarea {
-    width: 100%;
-    height: 20%;
-    border: none;
-    resize: none;
-  }
+	width: 100%;
+	height: 20%;
+	border: none;
+	resize: none;
+}
 </style>
 
 <script>
@@ -151,43 +154,6 @@ $(document).ready(function(){
 					$("#replyListContainer").append(replyMediaObject);
 				};
 			}
-			/*
-			complete : function (list){
-				<button id="replyDelete" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
-			// 수정버튼을 눌렀을 때
-			$("#replyModify").click(function() {
-				const reply =$("#replyBody").val();
-				const memberId = '${sessionScope.loggedInMember.id}';
-				const boardId = '${board.id}';
-				const id = $("#replyId").val();
-				const data = {
-						reply : reply,
-						id : id,
-						memberId : memberId,
-						boardId : boardId
-				};
-				
-				$.ajax({
-					url : appRoot+"/reply/modify",
-					type : "get",
-					data : data,
-					success : function() {
-						const replyMediaObject = $(`
-								<hr>
-									<div class="input-group">
-									<textarea id="replyTextarea" class="form-control" value="${reply}"></textarea>
-									<div class="input-group-append">
-										<button class="btn btn-outline-secondary" id="sendReply">
-											<i class="far fa-comment-dots fa-lg"></i>
-										</button>
-									</div>
-								</div>`);
-								
-								$(".media-body").append(replyMediaObject);
-					}
-				})
-			})// 수정 버튼 눌렀을 때
-			} */	
 		})
 	};
 	listReply(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
@@ -240,7 +206,7 @@ $(document).ready(function(){
 </script>
 
 
-<title>${board.nickName } - ${board.title }</title>
+<title>${board.nickName }- ${board.title }</title>
 </head>
 <body>
 	<!-- .container>.row>.col>h1{게시물 조회} -->
@@ -254,10 +220,15 @@ $(document).ready(function(){
 						<p>Written on : ${board.inserted } || Updated on : ${board.updated }</p>
 					</div>
 					<div class="p-2">
-						<p><i class="fas fa-eye"></i> ${board.views } </p>
+						<p>
+							<i class="fas fa-eye"></i>
+							${board.views }
+						</p>
 					</div>
 					<div class="p-2">
-						<p class="replyCount" style="margin-bottom:0px;"><i class="far fa-comment-dots fa-lg cnt"></i></p>
+						<p class="replyCount" style="margin-bottom: 0px;">
+							<i class="far fa-comment-dots fa-lg cnt"></i>
+						</p>
 					</div>
 				</div>
 				<hr>
@@ -272,43 +243,61 @@ $(document).ready(function(){
 						<textarea class="form-control" id="input2" readonly>${board.content }</textarea>
 						<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 					</div>
-					
-					<c:forEach items="${fileNames }" var="fileName">
-					<div class="row">
-						<div class="col">
-							<img class="img-fluid" src="/static/${board.id }/${fileName }" alt="${fileName }">
-						</div>
-					</div>						
-					</c:forEach>
-					
+					<table class="table table-hover table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th>Uploaded Images</th>
+							</tr>
+						</thead>
+						<c:forEach items="${fileNames }" var="fileName">
+							<tbody>
+								<tr>
+									<td>
+										<img class="img-fluid" src="/static/board/${board.id }/${fileName }" alt="${fileName }">
+									</td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<input type="text" class="form-control" id="input3" readonly value="${board.nickName }">
 					</div>
 					<!-- a.btn.btn-outline-secondary>i.far.fa-edit -->
-					<div class="d-flex justify-content-between">
-					<c:if test="${sessionScope.loggedInMember.id eq board.writer }">
-						<a href="modify?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">
-							<i class="fas fa-edit"> Modify</i>
-							/
-							<i class="fas fa-trash"> Delete</i>
-							<!-- <i class="far fa-edit"></i> -->
-						</a>
-					</c:if>
-					<a href="${pageContext.request.contextPath }/board/list?page=${currentPage}" class="btn btn-outline-secondary ">
-						<i class="fas fa-list"> Back to Board List</i>
-					</a>
-					</div>
+					<c:choose>
+						<c:when test="${sessionScope.loggedInMember.id eq board.writer }">
+							<div class="d-flex justify-content-between">
+								<a href="modify?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">
+									<i class="fas fa-edit"> Modify</i>
+									/
+									<i class="fas fa-trash"> Delete</i>
+									<!-- <i class="far fa-edit"></i> -->
+								</a>
+								<a href="${pageContext.request.contextPath }/board/list?page=${currentPage}" class="btn btn-outline-secondary ">
+									<i class="fas fa-list"> Back to Board List</i>
+								</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="d-flex justify-content-end">
+								<a href="${pageContext.request.contextPath }/board/list?page=${currentPage}" class="btn btn-outline-secondary ">
+									<i class="fas fa-list"> Back to Board List</i>
+								</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!--  댓글 작성 container  -->
 	<div class="container">
 		<hr>
 		<br>
-		<p style="margin-bottom:0px;" class="replyCount"><i class="far fa-comment-dots fa-lg cnt"></i></p>
+		<p style="margin-bottom: 0px;" class="replyCount">
+			<i class="far fa-comment-dots fa-lg cnt"></i>
+		</p>
 		<c:if test="${not empty sessionScope.loggedInMember }">
 			<div class="row">
 				<div class="col">
@@ -334,6 +323,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<b:copyright></b:copyright>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 </html>
