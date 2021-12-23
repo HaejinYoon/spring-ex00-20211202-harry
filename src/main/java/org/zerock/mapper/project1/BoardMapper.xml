@@ -52,22 +52,24 @@
 </select>
 <select id="read" resultType="org.zerock.domain.project1.BoardVO">
 	SELECT 
-		b.id,
-		b.title,
-		b.content,
-		b.writer,
-		b.inserted,
-		b.updated,
-		b.views,
-		m.nickName
+    	b.id,
+    	b.title,
+    	b.content,
+    	b.writer,
+    	b.inserted,
+    	b.updated,
+    	b.views,
+    	m.nickName,
+    	COUNT(r.id) replyCount
 	FROM
-		Board b
-	JOIN
-		Member m
-	ON
-		b.writer = m.id
+    	Board b
+    JOIN
+    	Member m ON b.writer = m.id
+    LEFT JOIN
+    	Reply r ON b.id = r.boardId
 	WHERE
 		b.id = #{id}
+    GROUP BY b.id
 </select>
 
 <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
@@ -100,36 +102,5 @@
 	WHERE
 		id = #{id}
 </update>
-<!-- <select id="getListPaging" resultType="org.zerock.domain.project1.BoardVO">
-	SELECT 
-    	b.id,
-    	b.title,
-    	b.content,
-    	b.writer,
-    	b.inserted,
-    	b.updated,
-    	b.views,
-    	m.nickName
-	FROM
-    	Board b
-    JOIN
-    	Member m ON b.writer = m.id
-	ORDER BY id DESC
-	LIMIT #{(page -1)*rowPerPage}, #{rowPerPage}
-</select> -->
-
-<!-- <select id="getTotal">
-	SELECT count(*) FROM Board
-</select> -->
-
-
-
-
-
-
-
-
-
-
 
 </mapper>

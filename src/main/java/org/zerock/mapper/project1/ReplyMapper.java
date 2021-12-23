@@ -18,5 +18,7 @@ public interface ReplyMapper {
 	public int deleteByBoardId(Integer boardId);
 
 	public Integer deleteByMemberId(String memberId);
+
+	public Integer listReplyCount(Integer id);
 	
 }

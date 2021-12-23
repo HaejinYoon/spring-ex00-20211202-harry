@@ -5,7 +5,7 @@
 <mapper namespace="org.zerock.mapper.project1.ReplyMapper">
 
 <delete id="deleteByMemberId">
-	DELETE FROM Reply WHERE writer = #{memberId}
+	DELETE FROM Reply WHERE memberId = #{memberId}
 </delete>
 
 <delete id="deleteByBoardId">
@@ -46,7 +46,8 @@ SELECT
 	r.reply,
 	r.inserted,
 	r.updated,
-	m.nickName
+	m.nickName,
+	m.adminQuali
 FROM
 	Reply r
 JOIN
@@ -57,6 +58,13 @@ WHERE
 	r.boardId = #{boardId}
 ORDER BY
 	r.id DESC
+</select>
+
+<select id="listReplyCount" resultType="Integer">
+SELECT
+	count(id)
+FROM Reply
+WHERE boardId=#{id};
 </select>
 
 

@@ -57,7 +57,7 @@ body {
 				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1">
 					<i class="fas fa-trash"> Delete</i>
 				</button>
-				<a href="${pageContext.request.contextPath }/board/list?page=${currentPage}" class="btn btn-outline-secondary">Cancel</a>
+				<a href="${pageContext.request.contextPath }/board/get?id=${board.id }&page=${currentPage}" class="btn btn-outline-secondary">Cancel</a>
 			</div>
 		</div>
 	</div>

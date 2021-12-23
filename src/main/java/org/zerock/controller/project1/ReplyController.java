@@ -63,8 +63,8 @@ public class ReplyController {
 		
 		// 댓글 조회
 		ReplyVO old = service.readById(id);
-		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만
-		if (logged !=null && logged.getId().equals(old.getMemberId())) {
+		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
+		if ((logged !=null && logged.getId().equals(old.getMemberId()))||logged.getAdminQuali()==1) {
 			// 업데이트
 			old.setReply(reply.getReply());
 			service.update(old);
@@ -83,8 +83,8 @@ public class ReplyController {
 				
 		// 댓글 조회
 		ReplyVO old = service.readById(id);
-		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만
-		if (logged !=null && logged.getId().equals(old.getMemberId())) {
+		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
+		if ((logged !=null && logged.getId().equals(old.getMemberId()))||logged.getAdminQuali()==1) {
 			// 삭제
 			service.delete(id);
 			
@@ -93,5 +93,9 @@ public class ReplyController {
 			// 권한 없음
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
+	}
+	@GetMapping("/count/{id}")
+	public Integer countReplyList(@PathVariable Integer id) {
+		return service.countReplyList(id);
 	}
 }

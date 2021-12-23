@@ -33,4 +33,8 @@ public class ReplyService {
 	public boolean delete(Integer id) {
 		return mapper.delete(id) == 1;
 	}
+
+	public Integer countReplyList(Integer id) {
+		return mapper.listReplyCount(id);
+	}
 }

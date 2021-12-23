@@ -17,6 +17,7 @@ public class ReplyVO {
 	
 	private Boolean own;
 	
+	private Integer adminQuali;
 	private String nickName;
 	
 	public String getInserted() {
