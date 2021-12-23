@@ -35,6 +35,7 @@ body {
 						<p>If you haven't signed up yet, go to sign-up tab and signup!</p>
 					</div>
 				</div>
+				<b:copyright></b:copyright>
 			</div>
 		</div>
 	</div>
