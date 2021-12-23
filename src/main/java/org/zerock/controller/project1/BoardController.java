@@ -91,7 +91,7 @@ public class BoardController {
 		 * 수정된 게시물 조회로 redirect rttr.addAttribute("id", board.getId()); return
 		 * "redirect:/board/get";
 		 */
-		return "redirect:/board/list?page="+page.getCurrentPage();
+		return "redirect:/board/get?id="+board.getId()+"&page="+page.getCurrentPage();
 	}
 
 	@GetMapping("/register")
