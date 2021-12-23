@@ -1,5 +1,6 @@
 package org.zerock.controller.project1;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.project1.BoardVO;
 import org.zerock.domain.project1.PageInfoVO;
@@ -71,8 +73,11 @@ public class BoardController {
 	public void get(@RequestParam("id") Integer id, @RequestParam("page") Integer page, Model model) {
 		service.updateViews(id);
 		BoardVO board = service.get(id);
+		
+		String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
 		model.addAttribute("currentPage", page);
+		model.addAttribute("fileNames", fileNames);
 	}
 
 	@GetMapping("/modify")
@@ -83,9 +88,14 @@ public class BoardController {
 	}
 
 	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr, PageInfoVO page) {
-		if (service.modify(board)) {
-			rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
+	public String modify(BoardVO board, MultipartFile[] files, RedirectAttributes rttr, PageInfoVO page) {
+		try {
+			if (service.modify(board, files)) {
+				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
+			}
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			rttr.addFlashAttribute("result", "No." + board.getId() + " Modify error");
 		}
 		/*
 		 * 수정된 게시물 조회로 redirect rttr.addAttribute("id", board.getId()); return
@@ -100,15 +110,20 @@ public class BoardController {
 	}
 
 	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
+	public String register(BoardVO board, MultipartFile[] files, RedirectAttributes rttr) {
 		// 2. request 분석 가공 BoardVO board 명시하는 것으로 생략가능
-		// 3.
-		service.register(board);
-		// 4. add attribute
-		rttr.addFlashAttribute("result", "No." + board.getId() + " board registered successfully");
+		try {
+			// 3.
+			service.register(board, files);
+			// 4. add attribute
+			rttr.addFlashAttribute("result", "No." + board.getId() + " board registered successfully");
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			rttr.addFlashAttribute("result", "No." + board.getId() + " board had problem");
+		}
 		// 5. forward/ redirect
 		// 책 : 목록으로 redirect
-
 		return "redirect:/board/list";
 	}
 
