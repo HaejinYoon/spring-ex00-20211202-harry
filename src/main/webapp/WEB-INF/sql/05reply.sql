@@ -24,20 +24,21 @@ SELECT
 	r.reply,
 	r.inserted,
 	r.updated,
-	m.nickName,
-    count(r.boardId)
-    
+	m.nickName
+	
 FROM
 	Reply r
 JOIN
 	Member m
 ON
 	r.memberId = m.id
-JOIN
-	Board b
-ON
-	r.boardId = b.id
+
 WHERE
-	boardId = 793
+	boardId = 794
 ORDER BY
 	id DESC;
+    
+SELECT
+	count(id)
+FROM Reply
+WHERE boardId=1003;
