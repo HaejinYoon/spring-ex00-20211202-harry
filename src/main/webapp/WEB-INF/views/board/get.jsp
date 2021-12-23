@@ -22,6 +22,9 @@ body {
 #input2 {
 	height: 300px;
 }
+#replyTextarea, #sendReply{
+	margin-bottom:10px;
+}
 
 p, .reply-body{
 	margin-bottom:0px;
