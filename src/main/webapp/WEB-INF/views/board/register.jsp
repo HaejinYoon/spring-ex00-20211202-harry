@@ -34,7 +34,7 @@ body {
 				<b:navBar active="register"></b:navBar>
 				<h1>Fill in Board</h1>
 				<!-- form>.form-group*3>label[for=input$]+input.form-control#input$ -->
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="input1">Title</label>
 						<input type="text" class="form-control" id="input1" name="title">
@@ -43,6 +43,13 @@ body {
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content"></textarea>
 					</div>
+					
+					<!-- .form-group>label[for=input4]+input[type=file].form-control-file#input4[name=files] -->
+					<div class="form-group">
+						<label for="input4">Image</label>
+						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
+					</div>
+					
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<c:if test="${not empty sessionScope.loggedInMember }">

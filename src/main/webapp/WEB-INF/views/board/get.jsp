@@ -269,6 +269,15 @@ $(document).ready(function(){
 						<textarea class="form-control" id="input2" readonly>${board.content }</textarea>
 						<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 					</div>
+					
+					<c:forEach items="${fileNames }" var="fileName">
+					<div class="row">
+						<div class="col">
+							<img class="img-fluid" src="/static/${board.id }/${fileName }" alt="${fileName }">
+						</div>
+					</div>						
+					</c:forEach>
+					
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<input type="text" class="form-control" id="input3" readonly value="${board.nickName }">

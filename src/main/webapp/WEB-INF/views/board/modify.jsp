@@ -33,7 +33,7 @@ body {
 				<b:navBar active="list"></b:navBar>
 				<h1>Board Modification</h1>
 				<!-- form>.form-group*3>label[for=input$]+input.form-control#input$ -->
-				<form id="modifyForm" method="post">
+				<form id="modifyForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }">
 					<div class="form-group">
 						<label for="input1">Title</label>
@@ -43,6 +43,12 @@ body {
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
 					</div>
+					
+					<div class="form-group">
+						<label for="input4">Image</label>
+						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
+					</div>
+					
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<input type="text" class="form-control" id="input3" value="${board.nickName }" readonly>
