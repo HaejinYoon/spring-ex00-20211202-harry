@@ -35,7 +35,7 @@ body {
 	text-align : center;
 }
 .views{
-	width : 60px;
+	width : 40px;
 	text-align : center;
 }
 td { 
@@ -49,7 +49,10 @@ td {
 .bTitle{
 	text-align : left
 }
-
+.new-board{
+	color : red;
+	text-shadow: 6px 2px 2px gray;
+}
 </style>
 <title>Board List</title>
 </head>
@@ -88,7 +91,10 @@ td {
 										<i class="far fa-images"></i>
 									</c:if>
 									<c:if test="${board.replyCount>0 }">
-										<i class="far fa-comments"> ${board.replyCount }</i>
+										<i class="far fa-comments"> [${board.replyCount }]</i>
+									</c:if>
+									<c:if test="${board.newMark<3}">
+										<span class="new-board">new</span>
 									</c:if>
 								</td>
 								<td>

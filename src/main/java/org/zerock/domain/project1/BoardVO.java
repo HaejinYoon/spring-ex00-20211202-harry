@@ -24,6 +24,8 @@ public class BoardVO {
 	
 	private Boolean hasFile;
 	
+	private Integer newMark;
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
