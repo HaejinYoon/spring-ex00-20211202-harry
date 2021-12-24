@@ -180,4 +180,8 @@ public class BoardService {
 		
 		return false;
 	}
+
+	public List<BoardVO> getListRecent() {
+		return mapper.getListRecent();
+	}
 }

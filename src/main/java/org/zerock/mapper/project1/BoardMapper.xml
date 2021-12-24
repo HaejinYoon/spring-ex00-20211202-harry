@@ -16,6 +16,30 @@
 	SELECT COUNT(*) FROM Board
 </select>
 
+<select id="getListRecent" resultType="org.zerock.domain.project1.BoardVO">
+	SELECT 
+    	b.id,
+    	b.title,
+    	b.content,
+    	b.writer,
+    	b.inserted,
+    	b.updated,
+    	b.views,
+    	m.nickName,
+    	COUNT(r.id) replyCount,
+    	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
+    	datediff(now(), b.inserted) newMark
+	FROM
+    	Board b
+    JOIN
+    	Member m ON b.writer = m.id
+    LEFT JOIN
+    	Reply r ON b.id = r.boardId
+	GROUP BY b.id
+    ORDER BY inserted DESC
+	LIMIT 0, 5
+</select>
+
 <select id="getListPage" resultType="org.zerock.domain.project1.BoardVO">
 	SELECT 
     	b.id,
@@ -27,7 +51,8 @@
     	b.views,
     	m.nickName,
     	COUNT(r.id) replyCount,
-    	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile
+    	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
+    	datediff(now(), b.inserted) newMark
 	FROM
     	Board b
     JOIN
@@ -48,7 +73,7 @@
     	b.inserted,
     	b.updated,
     	b.views,
-    	m.nickName
+    	m.nickName,
 	FROM
     	Board b
     JOIN

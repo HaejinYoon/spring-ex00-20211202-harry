@@ -17,6 +17,41 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 }
+.num {
+	width : 40px;
+	text-align : center;
+}
+.title{
+	width : 400px;
+	text-align : center;
+}
+.writer {
+	width : 70px;
+	text-align : center;
+}
+.date, .m-date{
+	width : 80px;
+	text-align : center;
+}
+.views{
+	width : 40px;
+	text-align : center;
+}
+td { 
+	vertical-align: middle; 
+	
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+	text-align : center;
+}
+.bTitle{
+	text-align : left
+}
+.new-board{
+	color : red;
+	text-shadow: 6px 2px 2px gray;
+}
 </style>
 <title>Home</title>
 </head>
@@ -34,6 +69,52 @@ body {
 						<p>You can access the write board tab after you login.</p>
 						<p>If you haven't signed up yet, go to sign-up tab and signup!</p>
 					</div>
+				</div>
+				<div>
+				<h3>Recent</h3><hr>
+				<table class="table table-hover table-bordered " style="table-layout: fixed;">
+					<thead class="thead-dark">
+						<tr>
+							<th class="num">
+								<i class="fab fa-slack-hash"></i>
+							</th>
+							<th class="title">Title</th>
+							<th class="writer">
+								<i class="fas fa-user"></i>
+							</th>
+							<th class="date">Date</th>
+							<th class="m-date">Modified Date</th>
+							<th class="views">Views</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list }" var="board">
+							<tr>
+								<td>${board.id }</td>
+								<td class="bTitle">
+									<a href="get?id=${board.id }&page=1">
+										<c:out value="${board.title }" />
+									</a>
+									<c:if test="${board.hasFile }">
+										<i class="far fa-images"></i>
+									</c:if>
+									<c:if test="${board.replyCount>0 }">
+										<i class="far fa-comments"> [${board.replyCount }]</i>
+									</c:if>
+									<c:if test="${board.newMark<3}">
+										<span class="new-board">new</span>
+									</c:if>
+								</td>
+								<td>
+									<c:out value="${board.nickName}"></c:out>
+								</td>
+								<td>${board.customInserted }</td>
+								<td>${board.customUpdated }</td>
+								<td>${board.views }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 				</div>
 				<b:copyright></b:copyright>
 			</div>
@@ -64,11 +145,7 @@ body {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	
 	<script>
-		$(document).ready(function() {
-			$(".nav-item").click(function(){
-				console.log("clicked.");
-			});
-		});
+
 	</script>
 </body>
 </html>

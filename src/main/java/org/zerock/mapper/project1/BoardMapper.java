@@ -34,6 +34,8 @@ public interface BoardMapper {
 	public int deleteByMemberId(String memberId);
 
 	public Integer[] selectByMemberId(String memberId);
+
+	public List<BoardVO> getListRecent();
 	
 //	//pagination
 //	public List<BoardVO> getListPaging();

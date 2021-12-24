@@ -27,8 +27,11 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/home")
-	public void home() {
-		
+	public void home(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+		List<BoardVO> list = service.getListRecent();
+
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
 	}
 	
 	@GetMapping("/list")
@@ -50,24 +53,6 @@ public class BoardController {
 
 		// 5. // jsp path : /WEB-INF/views/board/list.jsp }
 	}
-
-//	@GetMapping("/list")
-//	public int getTotal(Model model) {
-//		return 3;
-//	}
-
-//	  public List<BoardVO> getListPaging(Model model, int page, int rowPerPage) {
-//	  List<BoardVO> list = service.getListPaging();
-//	  
-//	  int endPage=1;
-//	  
-//	  
-//	  rowPerPage = 10;
-//	  
-//	  list=getListPaging(model, page, rowPerPage); int total = getTotal(model);
-//	  endPage = ((total-1) / rowPerPage) + 1;
-//	  
-//	  model.addAttribute("list", list); return list; }
 
 	// /board/get?id=10
 	@GetMapping("/get")
@@ -129,7 +114,7 @@ public class BoardController {
 		}
 		// 5. forward/ redirect
 		// 책 : 목록으로 redirect
-		return "redirect:/board/list";
+		return "redirect:/board/get?id="+board.getId()+"&page=1";
 	}
 
 	@PostMapping("/remove")
