@@ -243,7 +243,7 @@ $(document).ready(function(){
 						<textarea class="form-control" id="input2" readonly>${board.content }</textarea>
 						<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 					</div>
-					<c:if test="${not empty fileName }">
+					<c:if test="${empty fileName }">
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
@@ -326,6 +326,37 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<b:copyright></b:copyright>
+	
+		<!-- Modal -->
+	<c:if test="${not empty result }">
+		<div class="modal" tabindex="-1" id="modal1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Process Result</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>${result }</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			if (history.state == null) {
+				$("#modal1").modal('show');
+				history.replaceState({}, null);
+			}
+		});
+	</script>
 </body>
 </html>
