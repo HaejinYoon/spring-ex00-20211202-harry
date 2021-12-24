@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -183,5 +184,9 @@ public class BoardService {
 
 	public List<BoardVO> getListRecent() {
 		return mapper.getListRecent();
+	}
+
+	public List<BoardVO> getListSearchByTitle(@Param("search") String search, @Param("from") Integer from, @Param("items") Integer numberPerPage, Integer numberPerPagination) {
+		return mapper.getListSearchByTitle(search, from, numberPerPage, numberPerPagination);
 	}
 }

@@ -4,6 +4,31 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.project1.BoardMapper">
 
+<select id="getListSearchByTitle" resultType="org.zerock.domain.project1.BoardVO">
+	SELECT 
+    	b.id,
+    	b.title,
+    	b.content,
+    	b.writer,
+    	b.inserted,
+    	b.updated,
+    	b.views,
+    	b.notice,
+    	m.nickName,
+    	COUNT(r.id) replyCount,
+    	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
+    	datediff(now(), b.inserted) newMark
+	FROM
+    	Board b
+    JOIN
+    	Member m ON b.writer = m.id
+    LEFT JOIN
+    	Reply r ON b.id = r.boardId
+	WHERE title like concat('%',#{search},'%' )
+	GROUP BY b.id
+    ORDER BY b.id DESC
+</select>
+
 <select id="selectByMemberId" resultType="int">
 	SELECT id FROM Board WHERE writer = #{memberId}
 </select>
@@ -25,6 +50,7 @@
     	b.inserted,
     	b.updated,
     	b.views,
+    	b.notice,
     	m.nickName,
     	COUNT(r.id) replyCount,
     	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
@@ -36,7 +62,7 @@
     LEFT JOIN
     	Reply r ON b.id = r.boardId
 	GROUP BY b.id
-    ORDER BY inserted DESC
+    ORDER BY b.id DESC
 	LIMIT 0, 5
 </select>
 
@@ -49,6 +75,7 @@
     	b.inserted,
     	b.updated,
     	b.views,
+    	b.notice,
     	m.nickName,
     	COUNT(r.id) replyCount,
     	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
@@ -73,12 +100,19 @@
     	b.inserted,
     	b.updated,
     	b.views,
+    	b.notice,
     	m.nickName,
+    	COUNT(r.id) replyCount,
+    	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
+    	datediff(now(), b.inserted) newMark
 	FROM
     	Board b
     JOIN
     	Member m ON b.writer = m.id
-	ORDER BY id DESC
+    LEFT JOIN
+    	Reply r ON b.id = r.boardId
+    GROUP BY b.id
+	ORDER BY b.id DESC
 </select>
 <select id="read" resultType="org.zerock.domain.project1.BoardVO">
 	SELECT 
@@ -89,8 +123,11 @@
     	b.inserted,
     	b.updated,
     	b.views,
+    	b.notice,
     	m.nickName,
-    	COUNT(r.id) replyCount
+    	COUNT(r.id) replyCount,
+    	(SELECT EXISTS (SELECT * FROM File WHERE boardId = b.id)) hasFile,
+    	datediff(now(), b.inserted) newMark
 	FROM
     	Board b
     JOIN
@@ -104,8 +141,8 @@
 
 <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 	INSERT INTO
-		Board (title, content, writer, views) 
-	VALUES (#{title}, #{content}, #{writer}, 0)
+		Board (title, content, writer, views, notice) 
+	VALUES (#{title}, #{content}, #{writer}, 0, #{notice})
 </insert>
 
 <update id="update">
@@ -115,7 +152,8 @@
 		title=#{title},
 		content=#{content},
 		writer=#{writer},
-		updated=NOW()
+		updated=NOW(),
+		notice=#{notice}
 	WHERE
 		id = #{id}
 </update>

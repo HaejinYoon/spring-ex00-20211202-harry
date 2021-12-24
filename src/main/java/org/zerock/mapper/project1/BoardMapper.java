@@ -36,6 +36,8 @@ public interface BoardMapper {
 	public Integer[] selectByMemberId(String memberId);
 
 	public List<BoardVO> getListRecent();
+
+	public List<BoardVO> getListSearchByTitle(@Param("search") String search, @Param("from") Integer from, @Param("items") Integer numberPerPage, Integer numberPerPagination);
 	
 //	//pagination
 //	public List<BoardVO> getListPaging();

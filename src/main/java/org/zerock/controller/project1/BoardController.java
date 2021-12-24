@@ -1,7 +1,6 @@
 package org.zerock.controller.project1;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,32 +27,46 @@ public class BoardController {
 
 	@GetMapping("/home")
 	public void home(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
-		List<BoardVO> list = service.getListRecent();
+		List<BoardVO> list = service.getList();
 
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 	}
-	
 	@GetMapping("/list")
 	public void list(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
-//		  if(page == null) {
-//			  page=1;
-//		  }
+		
 		Integer numberPerPage = 10; // 한 페이지의 레코드의 수
 		Integer numberPerPagination = 10; // 한 페이지네이션안의 갯수
 		// 3. business logic
 		// 게시물(Board) 목록 조회
 //		  List<BoardVO> list = service.getList();
 		List<BoardVO> list = service.getListPage(page, numberPerPage, numberPerPagination);
+		List<BoardVO> listAll = service.getList();
+		
 		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
 
 		// 4.
 		model.addAttribute("list", list);
+		model.addAttribute("listAll", listAll);
 		model.addAttribute("pageInfo", pageInfo);
 
 		// 5. // jsp path : /WEB-INF/views/board/list.jsp }
 	}
 
+	@PostMapping("/list")
+	public void list2(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model, @RequestParam(value = "search", defaultValue = "") String search) {
+		System.out.println(search);
+
+		Integer numberPerPage = 10; // 한 페이지의 레코드의 수
+		Integer numberPerPagination = 10; // 한 페이지네이션안의 갯수
+		 
+		List<BoardVO> listSearch = service.getListSearchByTitle(search, page, numberPerPage, numberPerPagination);
+		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
+		  
+		System.out.println(listSearch);
+		model.addAttribute("listSearch", listSearch);
+		model.addAttribute("pageInfo2", pageInfo);
+	}
 	// /board/get?id=10
 	@GetMapping("/get")
 	public void get(@RequestParam("id") Integer id, @RequestParam("page") Integer page, Model model) {
@@ -78,7 +91,6 @@ public class BoardController {
 
 	@PostMapping("/modify")
 	public String modify(BoardVO board, String[] removeFile,  MultipartFile[] files, RedirectAttributes rttr, PageInfoVO page) {
-		System.out.println(Arrays.toString(removeFile));
 		try {
 			if (service.modify(board, removeFile, files)) {
 				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
@@ -101,6 +113,7 @@ public class BoardController {
 
 	@PostMapping("/register")
 	public String register(BoardVO board, MultipartFile[] files, RedirectAttributes rttr) {
+		System.out.println("notice : "+board.getNotice());
 		// 2. request 분석 가공 BoardVO board 명시하는 것으로 생략가능
 		try {
 			// 3.
