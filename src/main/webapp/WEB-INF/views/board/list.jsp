@@ -18,43 +18,56 @@ body {
 	font-size: 14px;
 	background-color:;
 }
+
 .num {
-	width : 40px;
-	text-align : center;
+	width: 40px;
+	text-align: center;
 }
-.title{
-	width : 400px;
-	text-align : center;
+
+.title {
+	width: 400px;
+	text-align: center;
 }
+
 .writer {
-	width : 70px;
-	text-align : center;
+	width: 70px;
+	text-align: center;
 }
-.date, .m-date{
-	width : 80px;
-	text-align : center;
+
+.date, .m-date {
+	width: 80px;
+	text-align: center;
 }
-.views{
-	width : 40px;
-	text-align : center;
+
+.views {
+	width: 40px;
+	text-align: center;
 }
-td { 
-	vertical-align: middle; 
-	
-	overflow:hidden;
-	white-space : nowrap;
+
+td {
+	vertical-align: middle;
+	overflow: hidden;
+	white-space: nowrap;
 	text-overflow: ellipsis;
-	text-align : center;
+	text-align: center;
 }
-.bTitle{
-	text-align : left
+
+.bTitle {
+	text-align: left
 }
-.new-board{
-	color : red;
-	text-shadow: 6px 2px 2px gray;
+
+.new-board {
+	font-weight: bold;
+	color: red;
+	text-shadow: 1px 2px 2px gray;
+}
+
+.notice {
+	font-weight: bold;
+	background-color: #007bff85;
 }
 </style>
-<title>Board List</title>
+<title>Board List </title>
 </head>
 <body>
 	<!-- .container>.orw>.col>h1{게시물 목록} -->
@@ -80,30 +93,93 @@ td {
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${listAll }" var="board">
+							<c:if test="${board.notice eq 1}">
+								<tr class="notice">
+									<td>${board.id }</td>
+									<td class="bTitle">
+										<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice</i>
+										<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
+											<c:out value="${board.title }" />
+										</a>
+										<c:if test="${board.hasFile }">
+											<i class="far fa-images"></i>
+										</c:if>
+										<c:if test="${board.replyCount>0 }">
+											<i class="far fa-comments"> [${board.replyCount }] </i>
+										</c:if>
+										<c:if test="${board.newMark<3}">
+											<span class="new-board">new</span>
+										</c:if>
+									</td>
+									<td>
+										<c:out value="${board.nickName}"></c:out>
+									</td>
+									<td>${board.customInserted }</td>
+									<td>${board.customUpdated }</td>
+									<td>${board.views }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
 						<c:forEach items="${list }" var="board">
-							<tr>
-								<td>${board.id }</td>
-								<td class="bTitle">
-									<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
-										<c:out value="${board.title }" />
-									</a>
-									<c:if test="${board.hasFile }">
-										<i class="far fa-images"></i>
-									</c:if>
-									<c:if test="${board.replyCount>0 }">
-										<i class="far fa-comments"> [${board.replyCount }]</i>
-									</c:if>
-									<c:if test="${board.newMark<3}">
-										<span class="new-board">new</span>
-									</c:if>
-								</td>
-								<td>
-									<c:out value="${board.nickName}"></c:out>
-								</td>
-								<td>${board.customInserted }</td>
-								<td>${board.customUpdated }</td>
-								<td>${board.views }</td>
-							</tr>
+							<c:if test="${board.notice < 2 }">
+								<tr>
+									<td>${board.id }</td>
+									<td class="bTitle">
+										<c:if test="${board.notice eq 1}">
+											<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice </i>
+										</c:if>
+										<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
+											<c:out value="${board.title }" />
+										</a>
+										<c:if test="${board.hasFile }">
+											<i class="far fa-images"></i>
+										</c:if>
+										<c:if test="${board.replyCount>0 }">
+											<i class="far fa-comments"> [${board.replyCount }]</i>
+										</c:if>
+										<c:if test="${board.newMark<3}">
+											<span class="new-board">new</span>
+										</c:if>
+									</td>
+									<td>
+										<c:out value="${board.nickName}"></c:out>
+									</td>
+									<td>${board.customInserted }</td>
+									<td>${board.customUpdated }</td>
+									<td>${board.views }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+						<c:forEach items="${listSearch }" var="board1">
+							<c:if test="${not empty listSearch }">
+								<tr>
+									<td>${board1.id }</td>
+									<td class="bTitle">
+										<c:if test="${board1.notice eq 1}">
+											<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice </i>
+										</c:if>
+										<a href="get?id=${board1.id }&page=${pageInfo.currentPage}">
+											<c:out value="${board1.title }" />
+										</a>
+										<c:if test="${board1.hasFile }">
+											<i class="far fa-images"></i>
+										</c:if>
+										<c:if test="${board1.replyCount>0 }">
+											<i class="far fa-comments"> [${board1.replyCount }]</i>
+										</c:if>
+										<c:if test="${board1.newMark<3}">
+											<span class="new-board">new</span>
+										</c:if>
+									</td>
+									<td>
+										<c:out value="${board1.nickName}"></c:out>
+									</td>
+									<td>${board1.customInserted }</td>
+									<td>${board1.customUpdated }</td>
+									<td>${board1.views }</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -116,7 +192,15 @@ td {
 			</div>
 		</div>
 	</div>
-	
+ 	
+ 	<!-- search bar -->
+ 	<hr>
+ 	<form method="post" class="form-inline my-2 my-lg-0 justify-content-center">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search by Title " aria-label="Search" name="search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+
 	<!-- pagination -->
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
@@ -167,6 +251,7 @@ td {
 			</c:if>
 		</ul>
 	</nav>
+
 	<b:copyright></b:copyright>
 	<!-- modal -->
 	<c:if test="${not empty result }">

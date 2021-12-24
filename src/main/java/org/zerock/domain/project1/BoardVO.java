@@ -26,6 +26,8 @@ public class BoardVO {
 	
 	private Integer newMark;
 	
+	private Integer notice;
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}

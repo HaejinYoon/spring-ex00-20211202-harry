@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
 body {
@@ -37,19 +37,31 @@ body {
 				<form method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="input1">Title</label>
-						<input type="text" class="form-control" id="input1" name="title">
+						<div class="input-group">
+							<input type="text" class="form-control" id="input1" name="title" >
+						</div>
 					</div>
+					<c:if test="${sessionScope.loggedInMember.adminQuali eq 1 }">
+						<br>
+							<div>
+								<input type="checkbox" name="notice" id="input5" value="1">
+								Notice <hr>
+							</div>
+						</c:if>
+						<div style="visibility: hidden">
+							<input type="hidden" name="notice" id="input6" value="0" >
+						</div>
 					<div class="form-group">
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content"></textarea>
 					</div>
-					
+
 					<!-- .form-group>label[for=input4]+input[type=file].form-control-file#input4[name=files] -->
 					<div class="form-group">
 						<label for="input4">Image</label>
 						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<c:if test="${not empty sessionScope.loggedInMember }">
@@ -63,7 +75,7 @@ body {
 
 
 					<button class="btn btn-outline-primary" type="submit">Register</button>
-					<a href="${pageContext.request.contextPath }/board/list"  class="btn btn-outline-secondary" >Cancel</a>					
+					<a href="${pageContext.request.contextPath }/board/list" class="btn btn-outline-secondary">Cancel</a>
 				</form>
 			</div>
 		</div>

@@ -41,37 +41,52 @@ body {
 					<input type="hidden" name="id" value="${board.id }">
 					<div class="form-group">
 						<label for="input1">Title</label>
-						<input type="text" class="form-control" id="input1" name="title" value="${board.title }">
+						<div class="input-group">
+							<input type="text" class="form-control" id="input1" name="title"  value="${board.title }">
+						</div>
+						<c:choose>
+							<c:when test="${board.notice eq 1 }">
+									<br><input type="checkbox" name="notice" id="input8" value="1" checked="checked">Notice
+							</c:when>
+							<c:when test="${sessionScope.loggedInMember.adminQuali eq 1 }">
+								<br>
+								<input type="checkbox" name="notice" id="input5" value="1">
+								Notice <hr>
+							</c:when>
+						</c:choose>
+						<div style="visibility: hidden">
+							<input type="hidden" name="notice" id="input6" value="0">
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
 					</div>
 					<c:if test="${not empty fileName }">
-					<table class="table table-hover table-bordered">
-						<thead class="thead-dark">
-							<tr>
-								<th>Select files to delete</th>
-								<th>Images</th>
-							</tr>
-						</thead>
-						<c:forEach items="${fileNames }" var="fileName">
-							<tbody>
+						<table class="table table-hover table-bordered">
+							<thead class="thead-dark">
 								<tr>
-									<td>
-										<div class="col d-flex justify-content-center align-items-center">
-											<input class="check" type="checkbox" name="removeFile" value="${fileName }">
-										</div>
-									</td>
-									<td>
-										<div class="col">
-											<img class="img-fluid" src="/static/board/${board.id }/${fileName }" alt="${fileName }">
-										</div>
-									</td>
+									<th>Select files to delete</th>
+									<th>Images</th>
 								</tr>
-							</tbody>
-						</c:forEach>
-					</table>
+							</thead>
+							<c:forEach items="${fileNames }" var="fileName">
+								<tbody>
+									<tr>
+										<td>
+											<div class="col d-flex justify-content-center align-items-center">
+												<input class="check" type="checkbox" name="removeFile" value="${fileName }">
+											</div>
+										</td>
+										<td>
+											<div class="col">
+												<img class="img-fluid" src="/static/board/${board.id }/${fileName }" alt="${fileName }">
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</c:forEach>
+						</table>
 					</c:if>
 
 					<div class="form-group">
@@ -132,6 +147,10 @@ body {
 				e.preventDefault();
 				$("#modifyForm").attr("action", "modify").submit();
 			});
+			if (history.state == null) {
+				$("#modal1").modal('show');
+				history.replaceState({}, null);
+			}
 		});
 	</script>
 </body>

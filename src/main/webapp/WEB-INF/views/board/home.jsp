@@ -50,9 +50,14 @@ td {
 }
 .new-board{
 	color : red;
-	text-shadow: 6px 2px 2px gray;
+	text-shadow: 1px 2px 2px gray;
+}
+.notice {
+	font-weight: bold;
+	background-color: #007bff85;
 }
 </style>
+
 <title>Home</title>
 </head>
 <body>
@@ -89,30 +94,60 @@ td {
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="board">
-							<tr>
-								<td>${board.id }</td>
-								<td class="bTitle">
-									<a href="get?id=${board.id }&page=1">
-										<c:out value="${board.title }" />
-									</a>
-									<c:if test="${board.hasFile }">
-										<i class="far fa-images"></i>
-									</c:if>
-									<c:if test="${board.replyCount>0 }">
-										<i class="far fa-comments"> [${board.replyCount }]</i>
-									</c:if>
-									<c:if test="${board.newMark<3}">
-										<span class="new-board">new</span>
-									</c:if>
-								</td>
-								<td>
-									<c:out value="${board.nickName}"></c:out>
-								</td>
-								<td>${board.customInserted }</td>
-								<td>${board.customUpdated }</td>
-								<td>${board.views }</td>
-							</tr>
+							<c:if test="${board.notice eq 1}">
+								<tr class="notice">
+									<td>${board.id }</td>
+									<td class="bTitle">
+										<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice</i>
+										<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
+											<c:out value="${board.title }" />
+										</a>
+										<c:if test="${board.hasFile }">
+											<i class="far fa-images"></i>
+										</c:if>
+										<c:if test="${board.replyCount>0 }">
+											<i class="far fa-comments"> [${board.replyCount }] </i>
+										</c:if>
+										<c:if test="${board.newMark<3}">
+											<span class="new-board">new</span>
+										</c:if>
+									</td>
+									<td>
+										<c:out value="${board.nickName}"></c:out>
+									</td>
+									<td>${board.customInserted }</td>
+									<td>${board.customUpdated }</td>
+									<td>${board.views }</td>
+								</tr>
+							</c:if>
 						</c:forEach>
+						<c:forEach items="${list }" var="board" begin="1" end="5">
+								<c:if test="${board.notice < 2 }">
+									<tr>
+										<td>${board.id }</td>
+										<td class="bTitle">
+											<a href="get?id=${board.id }&page=1">
+												<c:out value="${board.title }" />
+											</a>
+											<c:if test="${board.hasFile }">
+												<i class="far fa-images"></i>
+											</c:if>
+											<c:if test="${board.replyCount>0 }">
+												<i class="far fa-comments"> [${board.replyCount }]</i>
+											</c:if>
+											<c:if test="${board.newMark<3}">
+												<span class="new-board">new</span>
+											</c:if>
+										</td>
+										<td>
+											<c:out value="${board.nickName}"></c:out>
+										</td>
+										<td>${board.customInserted }</td>
+										<td>${board.customUpdated }</td>
+										<td>${board.views }</td>
+									</tr>
+								</c:if>
+							</c:forEach>
 					</tbody>
 				</table>
 				</div>
