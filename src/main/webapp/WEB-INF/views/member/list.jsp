@@ -69,8 +69,8 @@ body {
 			</div>
 		</div>
 	</div>
-<!-- pagination -->
 	<hr>
+<!-- pagination -->
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<c:if test="${pageInfo.hasPrevButton }">
