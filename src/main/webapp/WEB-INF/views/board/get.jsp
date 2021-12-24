@@ -206,7 +206,7 @@ $(document).ready(function(){
 </script>
 
 
-<title>${board.nickName }- ${board.title }</title>
+<title>${board.title } - ${board.nickName } </title>
 </head>
 <body>
 	<!-- .container>.row>.col>h1{게시물 조회} -->
@@ -243,6 +243,7 @@ $(document).ready(function(){
 						<textarea class="form-control" id="input2" readonly>${board.content }</textarea>
 						<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 					</div>
+					<c:if test="${not empty fileName }">
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
@@ -259,6 +260,7 @@ $(document).ready(function(){
 							</tbody>
 						</c:forEach>
 					</table>
+					</c:if>
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<input type="text" class="form-control" id="input3" readonly value="${board.nickName }">

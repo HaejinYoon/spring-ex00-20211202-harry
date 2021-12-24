@@ -47,6 +47,7 @@ body {
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
 					</div>
+					<c:if test="${not empty fileName }">
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
@@ -71,6 +72,7 @@ body {
 							</tbody>
 						</c:forEach>
 					</table>
+					</c:if>
 
 					<div class="form-group">
 						<label for="input4">Image</label>
