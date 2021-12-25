@@ -17,41 +17,63 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 }
+
 .num {
-	width : 40px;
-	text-align : center;
+	width: 50px;
+	text-align: center;
 }
-.title{
-	width : 400px;
-	text-align : center;
+
+.tag {
+	width: 55px;
 }
+
+.title {
+	width: 365px;
+	text-align: center;
+}
+
 .writer {
-	width : 70px;
-	text-align : center;
+	width: 70px;
+	text-align: center;
 }
-.date, .m-date{
-	width : 80px;
-	text-align : center;
+
+.date, .m-date {
+	width: 90px;
+	text-align: center;
 }
-.views{
-	width : 40px;
-	text-align : center;
+
+.views {
+	width: 50px;
+	text-align: center;
 }
-td { 
-	vertical-align: middle; 
-	
-	overflow:hidden;
-	white-space : nowrap;
+
+th, td {
+	vertical-align: middle;
+	overflow: hidden;
+	white-space: nowrap;
 	text-overflow: ellipsis;
-	text-align : center;
+	text-align: center;
 }
-.bTitle{
-	text-align : left
+
+.bTitle {
+	text-align: left;
+	-webkit-text-stroke-width: 0.3px;
+	-webkit-text-stroke-color: black;
 }
-.new-board{
-	color : red;
-	text-shadow: 1px 2px 2px gray;
+
+.bTag {
+	font-size: 12px;
+	-webkit-text-stroke-width: 0.3px;
+	-webkit-text-stroke-color: black;
+	text-shadow: 0.5px 1px 1px gray;
+	color: red;
 }
+
+.new-board {
+	color: red;
+	text-shadow: 0.5px 1px 1px gray;
+}
+
 .notice {
 	font-weight: bold;
 	background-color: #007bff85;
@@ -76,55 +98,65 @@ td {
 					</div>
 				</div>
 				<div>
-				<h3>Recent</h3><hr>
-				<table class="table table-hover table-bordered " style="table-layout: fixed;">
-					<thead class="thead-dark">
-						<tr>
-							<th class="num">
-								<i class="fab fa-slack-hash"></i>
-							</th>
-							<th class="title">Title</th>
-							<th class="writer">
-								<i class="fas fa-user"></i>
-							</th>
-							<th class="date">Date</th>
-							<th class="m-date">Modified Date</th>
-							<th class="views">Views</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list }" var="board">
-							<c:if test="${board.notice eq 1}">
-								<tr class="notice">
-									<td>${board.id }</td>
-									<td class="bTitle">
-										<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice</i>
-										<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
-											<c:out value="${board.title }" />
-										</a>
-										<c:if test="${board.hasFile }">
-											<i class="far fa-images"></i>
-										</c:if>
-										<c:if test="${board.replyCount>0 }">
-											<i class="far fa-comments"> [${board.replyCount }] </i>
-										</c:if>
-										<c:if test="${board.newMark<3}">
-											<span class="new-board">new</span>
-										</c:if>
-									</td>
-									<td>
-										<c:out value="${board.nickName}"></c:out>
-									</td>
-									<td>${board.customInserted }</td>
-									<td>${board.customUpdated }</td>
-									<td>${board.views }</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-						<c:forEach items="${list }" var="board" begin="1" end="5">
+					<h3>Recent</h3>
+					<hr>
+					<table class="table table-hover table-bordered " style="table-layout: fixed;">
+						<thead class="thead-dark">
+							<tr>
+								<th class="num">
+									<i class="fab fa-slack-hash"></i>
+								</th>
+								<th class="tag">Tag</th>
+								<th class="title">Title</th>
+								<th class="writer">
+									<i class="fas fa-user"></i>
+								</th>
+								<th class="date">Date</th>
+								<th class="m-date">Modified Date</th>
+								<th class="views">Views</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list }" var="board">
+								<c:if test="${board.notice eq 1}">
+									<tr class="notice">
+										<td>${board.id }</td>
+										<td class="bTag">
+											<i class="fas fa-exclamation"></i>
+											Notice
+										</td>
+										<td class="bTitle">
+											<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
+												<c:out value="${board.title }" />
+											</a>
+											<c:if test="${board.hasFile }">
+												<i class="far fa-images"></i>
+											</c:if>
+											<c:if test="${board.replyCount>0 }">
+												<i class="far fa-comments"> [${board.replyCount }] </i>
+											</c:if>
+											<c:if test="${board.newMark<3}">
+												<span class="new-board">new</span>
+											</c:if>
+										</td>
+										<td>
+											<c:out value="${board.nickName}"></c:out>
+										</td>
+										<td>${board.customInserted }</td>
+										<td>${board.customUpdated }</td>
+										<td>${board.views }</td>
+									</tr>
+								</c:if>
+							</c:forEach>
+							<c:forEach items="${list }" var="board" begin="1" end="5">
 								<c:if test="${board.notice < 2 }">
 									<tr>
 										<td>${board.id }</td>
+										<td class="bTag">
+											<c:if test="${board.notice eq 1}">
+												<i class="fas fa-exclamation" style="color: red;"> Notice </i>
+											</c:if>
+										</td>
 										<td class="bTitle">
 											<a href="get?id=${board.id }&page=1">
 												<c:out value="${board.title }" />
@@ -148,8 +180,8 @@ td {
 									</tr>
 								</c:if>
 							</c:forEach>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
 				</div>
 				<b:copyright></b:copyright>
 			</div>
@@ -178,9 +210,9 @@ td {
 	</c:if>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-	
-	<script>
 
+	<script>
+		
 	</script>
 </body>
 </html>

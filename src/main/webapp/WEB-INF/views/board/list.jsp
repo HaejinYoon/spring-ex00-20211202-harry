@@ -16,16 +16,19 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	background-color:;
 }
 
 .num {
-	width: 40px;
+	width: 50px;
 	text-align: center;
 }
 
+.tag {
+	width: 55px;
+}
+
 .title {
-	width: 400px;
+	width: 365px;
 	text-align: center;
 }
 
@@ -35,16 +38,16 @@ body {
 }
 
 .date, .m-date {
-	width: 80px;
+	width: 90px;
 	text-align: center;
 }
 
 .views {
-	width: 40px;
+	width: 50px;
 	text-align: center;
 }
 
-td {
+th, td {
 	vertical-align: middle;
 	overflow: hidden;
 	white-space: nowrap;
@@ -53,21 +56,30 @@ td {
 }
 
 .bTitle {
-	text-align: left
+	text-align: left;
+	-webkit-text-stroke-width: 0.3px;
+	-webkit-text-stroke-color: black;
+}
+
+.bTag {
+	font-size: 12px;
+	-webkit-text-stroke-width: 0.3px;
+	-webkit-text-stroke-color: black;
+	text-shadow: 0.5px 1px 1px gray;
+	color: red;
 }
 
 .new-board {
-	font-weight: bold;
 	color: red;
-	text-shadow: 1px 2px 2px gray;
+	text-shadow: 0.5px 1px 1px gray;
 }
 
 .notice {
 	font-weight: bold;
-	background-color: #007bff85;
+	background-color: #ffd044;
 }
 </style>
-<title>Board List </title>
+<title>Board List</title>
 </head>
 <body>
 	<!-- .container>.orw>.col>h1{게시물 목록} -->
@@ -83,6 +95,7 @@ td {
 							<th class="num">
 								<i class="fab fa-slack-hash"></i>
 							</th>
+							<th class="tag">Tag</th>
 							<th class="title">Title</th>
 							<th class="writer">
 								<i class="fas fa-user"></i>
@@ -97,8 +110,11 @@ td {
 							<c:if test="${board.notice eq 1}">
 								<tr class="notice">
 									<td>${board.id }</td>
+									<td class="bTag">
+										<i class="fas fa-exclamation"></i>
+										Notice
+									</td>
 									<td class="bTitle">
-										<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice</i>
 										<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
 											<c:out value="${board.title }" />
 										</a>
@@ -125,10 +141,12 @@ td {
 							<c:if test="${board.notice < 2 }">
 								<tr>
 									<td>${board.id }</td>
-									<td class="bTitle">
+									<td class="bTag">
 										<c:if test="${board.notice eq 1}">
-											<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice </i>
+											<i class="fas fa-exclamation" style="color: red;"> Notice </i>
 										</c:if>
+									</td>
+									<td class="bTitle">
 										<a href="get?id=${board.id }&page=${pageInfo.currentPage}">
 											<c:out value="${board.title }" />
 										</a>
@@ -155,10 +173,12 @@ td {
 							<c:if test="${not empty listSearch }">
 								<tr>
 									<td>${board1.id }</td>
-									<td class="bTitle">
+									<td class="bTag">
 										<c:if test="${board1.notice eq 1}">
-											<i class="fas fa-exclamation" style="color: red; text-shadow: 1px 2px 2px gray;"> Notice </i>
+											<i class="fas fa-exclamation" style="color: red;"> Notice </i>
 										</c:if>
+									</td>
+									<td class="bTitle">
 										<a href="get?id=${board1.id }&page=${pageInfo.currentPage}">
 											<c:out value="${board1.title }" />
 										</a>
@@ -192,14 +212,14 @@ td {
 			</div>
 		</div>
 	</div>
- 	
- 	<!-- search bar -->
- 	<hr>
- 	<form method="post" class="form-inline my-2 my-lg-0 justify-content-center">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search by Title " aria-label="Search" name="search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <br>
+
+	<!-- search bar -->
+	<hr>
+	<form method="post" class="form-inline my-2 my-lg-0 justify-content-center">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search by Title " aria-label="Search" name="search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	</form>
+	<br>
 
 	<!-- pagination -->
 	<nav aria-label="Page navigation example">
