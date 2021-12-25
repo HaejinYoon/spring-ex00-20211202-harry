@@ -16,6 +16,15 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background:
+		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.main {
+	background-color: white;
+	border-radius: 7px;
 }
 
 #input2 {
@@ -31,7 +40,7 @@ body {
 </head>
 <body>
 	<!-- .container>.row>.col>h1{게시물 작성} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="list"></b:navBar>
@@ -42,11 +51,12 @@ body {
 					<div class="form-group">
 						<label for="input1">Title</label>
 						<div class="input-group">
-							<input type="text" class="form-control" id="input1" name="title"  value="${board.title }">
+							<input type="text" class="form-control" id="input1" name="title" value="${board.title }">
 						</div>
 						<c:choose>
 							<c:when test="${board.notice eq 1 }">
-									<br><input type="checkbox" name="notice" id="input8" value="1" checked="checked">Notice
+								<br>
+								<input type="checkbox" name="notice" id="input8" value="1" checked="checked">Notice
 							</c:when>
 							<c:when test="${sessionScope.loggedInMember.adminQuali eq 1 }">
 								<br>

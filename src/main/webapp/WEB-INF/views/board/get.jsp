@@ -17,6 +17,13 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background: url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.main{
+	background-color: white;
+	border-radius: 7px;
 }
 
 #input2 {
@@ -210,7 +217,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<!-- .container>.row>.col>h1{게시물 조회} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="list"></b:navBar>
@@ -291,41 +298,41 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<!--  댓글 작성 container  -->
-	<div class="container">
-		<hr>
-		<br>
-		<p style="margin-bottom: 0px;" class="replyCount">
-			<i class="far fa-comment-dots fa-lg cnt"></i>
-		</p>
-		<c:if test="${not empty sessionScope.loggedInMember }">
-			<div class="row">
-				<div class="col">
-					<hr>
-					<!-- .input-group>textarea#replyTextarea.form-control+.input-group-append>button.btn.btn-outline-secondary#sendReply -->
-					<div class="input-group">
-						<textarea id="replyTextarea" class="form-control"></textarea>
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" id="sendReply">
-								<i class="far fa-comment-dots fa-lg"></i>
-							</button>
+		<!--  댓글 작성 container  -->
+		<div class="container">
+			<hr>
+			<br>
+			<p style="margin-bottom: 0px;" class="replyCount">
+				<i class="far fa-comment-dots fa-lg cnt"></i>
+			</p>
+			<c:if test="${not empty sessionScope.loggedInMember }">
+				<div class="row">
+					<div class="col">
+						<hr>
+						<!-- .input-group>textarea#replyTextarea.form-control+.input-group-append>button.btn.btn-outline-secondary#sendReply -->
+						<div class="input-group">
+							<textarea id="replyTextarea" class="form-control"></textarea>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" id="sendReply">
+									<i class="far fa-comment-dots fa-lg"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</c:if>
-	</div>
-	<!--  댓글 container -->
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<div id="replyListContainer"></div>
+			</c:if>
+		</div>
+		<!--  댓글 container -->
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div id="replyListContainer"></div>
+				</div>
 			</div>
 		</div>
+		<b:copyright></b:copyright>
 	</div>
-	<b:copyright></b:copyright>
+
 	
 		<!-- Modal -->
 	<c:if test="${not empty result }">

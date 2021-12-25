@@ -8,14 +8,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background:
+		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.main {
+	background-color: white;
+	border-radius: 7px;
 }
 </style>
 
@@ -23,7 +32,7 @@ body {
 </head>
 <body>
 	<!-- .container>.row>.col>h1{Members List} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="memberList"></b:navBar>
@@ -68,58 +77,59 @@ body {
 				</table>
 			</div>
 		</div>
-	</div>
-	<hr>
-<!-- pagination -->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<c:if test="${pageInfo.hasPrevButton }">
-				<c:url value="/member/list" var="pageLink">
-					<c:param name="page" value="${pageInfo.leftPageNumber-1 }"></c:param>
-				</c:url>
-				<c:url value="/member/list" var="pageLinkStart">
-					<c:param name="page" value="1"></c:param>
-				</c:url>
-				<li class="page-item">
-					<a class="page-link" href="${pageLinkStart }" aria-label="Start">
-						<i class="fas fa-angle-double-left"></i>
-					</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="${pageLink }" aria-label="Previous">
-						<i class="fas fa-angle-left"></i>
-					</a>
-				</li>
-			</c:if>
+		<hr>
+		<!-- pagination -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageInfo.hasPrevButton }">
+					<c:url value="/member/list" var="pageLink">
+						<c:param name="page" value="${pageInfo.leftPageNumber-1 }"></c:param>
+					</c:url>
+					<c:url value="/member/list" var="pageLinkStart">
+						<c:param name="page" value="1"></c:param>
+					</c:url>
+					<li class="page-item">
+						<a class="page-link" href="${pageLinkStart }" aria-label="Start">
+							<i class="fas fa-angle-double-left"></i>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="${pageLink }" aria-label="Previous">
+							<i class="fas fa-angle-left"></i>
+						</a>
+					</li>
+				</c:if>
 
-			<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
-				<c:url value="/member/list" var="pageLink">
-					<c:param name="page" value="${pageNumber }"></c:param>
-				</c:url>
-				<li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : ' ' }">
-					<a class="page-link" href="${pageLink }">${pageNumber }</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pageInfo.hasNextButton }">
-				<c:url value="/member/list" var="pageLink">
-					<c:param name="page" value="${pageInfo.rightPageNumber+1 }"></c:param>
-				</c:url>
-				<c:url value="/member/list" var="pageLinkEnd">
-					<c:param name="page" value="${pageInfo.lastPage }"></c:param>
-				</c:url>
-				<li class="page-item">
-					<a class="page-link" href="${pageLink }" aria-label="Next">
-						<i class="fas fa-angle-right"></i>
-					</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="${pageLinkEnd }" aria-label="End">
-						<i class="fas fa-angle-double-right"></i>
-					</a>
-				</li>
-			</c:if>
-		</ul>
-	</nav>
+				<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
+					<c:url value="/member/list" var="pageLink">
+						<c:param name="page" value="${pageNumber }"></c:param>
+					</c:url>
+					<li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : ' ' }">
+						<a class="page-link" href="${pageLink }">${pageNumber }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageInfo.hasNextButton }">
+					<c:url value="/member/list" var="pageLink">
+						<c:param name="page" value="${pageInfo.rightPageNumber+1 }"></c:param>
+					</c:url>
+					<c:url value="/member/list" var="pageLinkEnd">
+						<c:param name="page" value="${pageInfo.lastPage }"></c:param>
+					</c:url>
+					<li class="page-item">
+						<a class="page-link" href="${pageLink }" aria-label="Next">
+							<i class="fas fa-angle-right"></i>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="${pageLinkEnd }" aria-label="End">
+							<i class="fas fa-angle-double-right"></i>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
+		<b:copyright></b:copyright>
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>

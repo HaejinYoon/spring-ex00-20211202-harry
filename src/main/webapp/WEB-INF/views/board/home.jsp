@@ -16,6 +16,9 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background: url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .num {
@@ -78,12 +81,16 @@ th, td {
 	font-weight: bold;
 	background-color: #adb5bd;
 }
+.main{
+	background-color: white;
+	border-radius: 7px;
+}
 </style>
 
 <title>Home</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="home"></b:navBar>

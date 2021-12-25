@@ -10,12 +10,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link href="<%= request.getContextPath() %>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
-body, input{
+body, input {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background:
+		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.main {
+	background-color: white;
+	border-radius: 7px;
 }
 </style>
 
@@ -23,7 +32,7 @@ body, input{
 </head>
 <body>
 	<!-- .container>.row>.col>h1{Log-in} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="login"></b:navBar>

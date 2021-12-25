@@ -16,6 +16,15 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background:
+		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.main {
+	background-color: white;
+	border-radius: 7px;
 }
 
 #input2 {
@@ -28,7 +37,7 @@ body {
 <body>
 
 	<!-- .container>.row>.col>h1{게시물 작성} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="register"></b:navBar>
@@ -38,19 +47,20 @@ body {
 					<div class="form-group">
 						<label for="input1">Title</label>
 						<div class="input-group">
-							<input type="text" class="form-control" id="input1" name="title" >
+							<input type="text" class="form-control" id="input1" name="title">
 						</div>
 					</div>
 					<c:if test="${sessionScope.loggedInMember.adminQuali eq 1 }">
 						<br>
-							<div>
-								<input type="checkbox" name="notice" id="input5" value="1">
-								Notice <hr>
-							</div>
-						</c:if>
-						<div style="visibility: hidden">
-							<input type="hidden" name="notice" id="input6" value="0" >
+						<div>
+							<input type="checkbox" name="notice" id="input5" value="1">
+							Notice
+							<hr>
 						</div>
+					</c:if>
+					<div style="visibility: hidden">
+						<input type="hidden" name="notice" id="input6" value="0">
+					</div>
 					<div class="form-group">
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content"></textarea>
@@ -79,6 +89,7 @@ body {
 				</form>
 			</div>
 		</div>
+		<b:copyright></b:copyright>
 	</div>
 
 

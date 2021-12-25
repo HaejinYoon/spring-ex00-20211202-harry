@@ -16,6 +16,13 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background: url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.main{
+	background-color: white;
+	border-radius: 7px;
 }
 
 .num {
@@ -83,7 +90,7 @@ th, td {
 </head>
 <body>
 	<!-- .container>.orw>.col>h1{게시물 목록} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="list"></b:navBar>
@@ -211,8 +218,6 @@ th, td {
 				</div>
 			</div>
 		</div>
-	</div>
-
 	<!-- search bar -->
 	<hr>
 	<form method="post" class="form-inline my-2 my-lg-0 justify-content-center">
@@ -220,59 +225,61 @@ th, td {
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 	</form>
 	<br>
+		<!-- pagination -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageInfo.hasPrevButton }">
+					<c:url value="/board/list" var="pageLink">
+						<c:param name="page" value="${pageInfo.leftPageNumber-1 }"></c:param>
+					</c:url>
+					<c:url value="/board/list" var="pageLinkStart">
+						<c:param name="page" value="1"></c:param>
+					</c:url>
+					<li class="page-item">
+						<a class="page-link" href="${pageLinkStart }" aria-label="Start">
+							<i class="fas fa-angle-double-left"></i>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="${pageLink }" aria-label="Previous">
+							<i class="fas fa-angle-left"></i>
+						</a>
+					</li>
+				</c:if>
 
-	<!-- pagination -->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<c:if test="${pageInfo.hasPrevButton }">
-				<c:url value="/board/list" var="pageLink">
-					<c:param name="page" value="${pageInfo.leftPageNumber-1 }"></c:param>
-				</c:url>
-				<c:url value="/board/list" var="pageLinkStart">
-					<c:param name="page" value="1"></c:param>
-				</c:url>
-				<li class="page-item">
-					<a class="page-link" href="${pageLinkStart }" aria-label="Start">
-						<i class="fas fa-angle-double-left"></i>
-					</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="${pageLink }" aria-label="Previous">
-						<i class="fas fa-angle-left"></i>
-					</a>
-				</li>
-			</c:if>
+				<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
+					<c:url value="/board/list" var="pageLink">
+						<c:param name="page" value="${pageNumber }"></c:param>
+					</c:url>
+					<li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : ' ' }">
+						<a class="page-link" href="${pageLink }">${pageNumber }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageInfo.hasNextButton }">
+					<c:url value="/board/list" var="pageLink">
+						<c:param name="page" value="${pageInfo.rightPageNumber+1 }"></c:param>
+					</c:url>
+					<c:url value="/board/list" var="pageLinkEnd">
+						<c:param name="page" value="${pageInfo.lastPage }"></c:param>
+					</c:url>
+					<li class="page-item">
+						<a class="page-link" href="${pageLink }" aria-label="Next">
+							<i class="fas fa-angle-right"></i>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="${pageLinkEnd }" aria-label="End">
+							<i class="fas fa-angle-double-right"></i>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
 
-			<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
-				<c:url value="/board/list" var="pageLink">
-					<c:param name="page" value="${pageNumber }"></c:param>
-				</c:url>
-				<li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : ' ' }">
-					<a class="page-link" href="${pageLink }">${pageNumber }</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pageInfo.hasNextButton }">
-				<c:url value="/board/list" var="pageLink">
-					<c:param name="page" value="${pageInfo.rightPageNumber+1 }"></c:param>
-				</c:url>
-				<c:url value="/board/list" var="pageLinkEnd">
-					<c:param name="page" value="${pageInfo.lastPage }"></c:param>
-				</c:url>
-				<li class="page-item">
-					<a class="page-link" href="${pageLink }" aria-label="Next">
-						<i class="fas fa-angle-right"></i>
-					</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="${pageLinkEnd }" aria-label="End">
-						<i class="fas fa-angle-double-right"></i>
-					</a>
-				</li>
-			</c:if>
-		</ul>
-	</nav>
+		<b:copyright></b:copyright>
+	</div>
 
-	<b:copyright></b:copyright>
+
 	<!-- modal -->
 	<c:if test="${not empty result }">
 		<div class="modal" tabindex="-1" id="modal1">

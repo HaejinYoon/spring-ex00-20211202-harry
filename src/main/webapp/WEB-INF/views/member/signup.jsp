@@ -17,6 +17,15 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background:
+		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.main {
+	background-color: white;
+	border-radius: 7px;
 }
 </style>
 
@@ -24,7 +33,7 @@ body {
 </head>
 <body>
 	<!-- .container>.row>.col>h1{회원 가입} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="signup"></b:navBar>
@@ -79,6 +88,7 @@ body {
 				</form>
 			</div>
 		</div>
+		<b:copyright></b:copyright>
 	</div>
 
 

@@ -17,6 +17,15 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
+	background:
+		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.main {
+	background-color: white;
+	border-radius: 7px;
 }
 </style>
 
@@ -24,7 +33,7 @@ body {
 </head>
 <body>
 	<!-- .container>.row>.col>h1{Member Information} -->
-	<div class="container">
+	<div class="container main">
 		<div class="row">
 			<div class="col">
 				<b:navBar active="memberInfo"></b:navBar>
@@ -71,10 +80,11 @@ body {
 					<!-- button.btn.btn-outline-secondary{Modify}+button.btn.btn-outline-danger{Delete} -->
 					<button class="btn btn-secondary" id="modifyButton" disabled>Modify</button>
 					<button class="btn btn-danger" id="removeButton">End Membership</button>
-					<a href="${pageContext.request.contextPath }/board/list"  class="btn btn-outline-secondary" >Cancel</a>
+					<a href="${pageContext.request.contextPath }/board/list" class="btn btn-outline-secondary">Cancel</a>
 				</form>
 			</div>
 		</div>
+		<b:copyright></b:copyright>
 	</div>
 
 
