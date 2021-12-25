@@ -76,7 +76,7 @@ th, td {
 
 .notice {
 	font-weight: bold;
-	background-color: #007bff85;
+	background-color: #adb5bd;
 }
 </style>
 

@@ -76,7 +76,7 @@ th, td {
 
 .notice {
 	font-weight: bold;
-	background-color: #ffd044;
+	background-color: #adb5bd;
 }
 </style>
 <title>Board List</title>
