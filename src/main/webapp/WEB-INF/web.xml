@@ -15,7 +15,7 @@
       <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
-    <multipart-config></multipart-config>
+    <multipart-config/>
   </servlet>
   <servlet-mapping>
     <servlet-name>appServlet</servlet-name>
@@ -45,4 +45,7 @@
     <url-pattern>/member/info</url-pattern>
     <url-pattern>/board/register</url-pattern>
   </filter-mapping>
+  <listener>
+    <listener-class>org.zerock.listener.AppListener</listener-class>
+  </listener>
 </web-app>
