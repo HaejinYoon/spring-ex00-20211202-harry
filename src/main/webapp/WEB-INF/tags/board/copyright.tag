@@ -12,4 +12,4 @@
 <hr class="my-4">
 <p class="plist">You can see, read a board without login</p>
 <p class="plist">You can access the write board tab after you login.</p>
-<p class="plist">If you haven't signed up yet, go to sign-up tab and signup!</p>
+<p class="plist">If you haven't signed up yet, go to sign-up tab and signup!</p><br>

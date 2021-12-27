@@ -16,8 +16,7 @@
 body, input {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	background:
-		url('https://www.10wallpaper.com/wallpaper/2560x1600/1807/Manhattan_skyline_New_York_City_Skyscraper_2560x1600.jpg');
+	background: url('https://s20211227-17499.s3.ap-northeast-2.amazonaws.com/wp2231069-3440x1440-wallpapers.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -51,6 +50,7 @@ body, input {
 				</form>
 			</div>
 		</div>
+		<b:copyright></b:copyright>
 	</div>
 
 	<!-- modal -->
