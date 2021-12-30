@@ -19,6 +19,7 @@ public class ReplyVO {
 	
 	private Integer adminQuali;
 	private String nickName;
+	private Integer replyCount;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
