@@ -71,7 +71,7 @@ body {
 						<label for="input2">Contents</label>
 						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
 					</div>
-					<c:if test="${not empty fileName }">
+					<c:if test="${not empty fileNames }">
 						<table class="table table-hover table-bordered">
 							<thead class="thead-dark">
 								<tr>

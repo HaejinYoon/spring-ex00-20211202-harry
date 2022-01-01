@@ -246,15 +246,15 @@ textarea {
 					<div class="form-group">
 						<label for="input2">Content</label>
 						<textarea class="form-control" id="input2" readonly>${board.content }</textarea>
-						<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 					</div>
-					<c:if test="${empty fileName }">
+					<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
 								<th>Uploaded Images</th>
 							</tr>
 						</thead>
+						<c:if test="${not empty fileNames }">
 						<c:forEach items="${fileNames }" var="fileName">
 							<tbody>
 								<tr>
@@ -264,8 +264,8 @@ textarea {
 								</tr>
 							</tbody>
 						</c:forEach>
-					</table>
 					</c:if>
+					</table>
 					<div class="form-group">
 						<label for="input3">Writer</label>
 						<input type="text" class="form-control" id="input3" readonly value="${board.nickName }">
