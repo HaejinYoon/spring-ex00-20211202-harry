@@ -250,8 +250,8 @@ public class BoardService {
 //				File newFile = new File(staticRoot+"\\"+board.getId()+"\\" + file.getOriginalFilename());
 //				if(!newFile.exists()) {
 					// 2. db 파일명 insert					
-				fileMapper.insert(board.getId(), file.getOriginalFilename());
 				fileMapper.delete(board.getId(), file.getOriginalFilename());
+				fileMapper.insert(board.getId(), file.getOriginalFilename());
 			}
 		}
 		return false;
