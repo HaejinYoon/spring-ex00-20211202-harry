@@ -155,7 +155,7 @@ th, td {
 									</tr>
 								</c:if>
 							</c:forEach>
-							<c:forEach items="${list }" var="board" begin="1" end="5">
+							<c:forEach items="${list }" var="board" begin="0" end="4">
 								<c:if test="${board.notice < 2 }">
 									<tr>
 										<td>${board.id }</td>
