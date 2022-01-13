@@ -328,11 +328,12 @@ textarea {
 				</div>
 			</div>
 		</div>
+		
 		<b:copyright></b:copyright>
 	</div>
 
 	
-		<!-- Modal -->
+		<!-- Result Modal -->
 	<c:if test="${not empty result }">
 		<div class="modal" tabindex="-1" id="modal1">
 			<div class="modal-dialog">
